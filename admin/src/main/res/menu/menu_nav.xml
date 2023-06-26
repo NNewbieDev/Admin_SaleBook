@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/home"
+            android:actionLayout="@layout/custom_menu"
+            android:title=""
+            app:showAsAction="" />
+        <!--        <item-->
+        <!--            android:id="@+id/dbManager"-->
+        <!--            android:icon="@drawable/database_solid"-->
+        <!--            android:title="">-->
+        <!--            <menu >-->
+        <!--                <item-->
+        <!--                    android:id="@+id/accountManager"-->
+        <!--                    android:icon="@drawable/database_solid"-->
+        <!--                    android:title="@string/account_manager"></item>-->
+        <!--                <item-->
+        <!--                    android:id="@+id/categoryManager"-->
+        <!--                    android:icon="@drawable/database_solid"-->
+        <!--                    android:title="@string/category_manager"></item>-->
+        <!--                <item-->
+        <!--                    android:id="@+id/productManager"-->
+        <!--                    android:icon="@drawable/database_solid"-->
+        <!--                    android:title="@string/product_manager">-->
+        <!--                </item>-->
+        <!--            </menu>-->
+        <!--        </item>-->
+    </group>
+</menu>
