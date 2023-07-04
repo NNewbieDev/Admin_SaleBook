@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lightorange">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/im_user_solid"
+        android:layout_width="59dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="40dp"
+        android:src="@drawable/user_solid_52"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:tint="@color/darkorange" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="264dp"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="-2dp"
+        tools:layout_editor_absoluteY="235dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:background="@color/darkorange"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/tv_user"
+                android:layout_width="185dp"
+                android:layout_height="58dp"
+                android:background="@color/orange"
+                android:drawableStart="@drawable/user_solid"
+                android:drawablePadding="13dp"
+                android:gravity="center_vertical"
+                android:paddingStart="10dp"
+                android:text="Tên tài khoản"
+                android:textColor="@color/darkorange"
+                android:textSize="22dp" />
+
+            <TextView
+                android:id="@+id/tv_user_edit"
+                android:layout_width="180dp"
+                android:layout_height="58dp"
+                android:layout_marginStart="4dp"
+                android:background="@color/darkorange"
+                android:gravity="center_vertical"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:text="Username1"
+                android:textColor="@color/white"
+                android:textSize="23dp" />
+
+            <ImageView
+                android:id="@+id/iv_edit_user"
+                android:layout_width="40dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                android:paddingRight="15dp"
+                android:src="@drawable/pen_solid" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:background="@color/darkorange"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/tv_address"
+                android:layout_width="185dp"
+                android:layout_height="58dp"
+                android:background="@color/orange"
+                android:drawableStart="@drawable/baseline_add_location_24"
+                android:drawablePadding="13dp"
+                android:gravity="center_vertical"
+                android:paddingStart="10dp"
+                android:text="Địa chỉ"
+                android:textColor="@color/darkorange"
+                android:textSize="22dp" />
+
+            <ScrollView
+                android:layout_width="180dp"
+                android:layout_height="58dp"
+                android:scrollbars="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_address_edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="58dp"
+                    android:layout_marginStart="4dp"
+                    android:background="@color/darkorange"
+                    android:gravity="center_vertical"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
+                    android:text="A30, đường ABC"
+                    android:textColor="@color/white"
+                    android:textSize="23dp" />
+
+            </ScrollView>
+
+            <ImageView
+                android:id="@+id/iv_edit_address"
+                android:layout_width="40dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                android:paddingRight="15dp"
+                android:src="@drawable/pen_solid" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:background="@color/darkorange"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_phone_number"
+                android:layout_width="185dp"
+                android:layout_height="58dp"
+                android:background="@color/orange"
+                android:drawableStart="@drawable/baseline_phone_24"
+                android:drawablePadding="13dp"
+                android:gravity="center_vertical"
+                android:paddingStart="10dp"
+                android:text="Điện thoại"
+                android:textColor="@color/darkorange"
+                android:textSize="22dp" />
+
+            <TextView
+                android:id="@+id/tv_phone_number_edit"
+                android:layout_width="180dp"
+                android:layout_height="58dp"
+                android:layout_marginStart="4dp"
+                android:background="@color/darkorange"
+                android:gravity="center_vertical"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:text="0909121212"
+                android:textColor="@color/white"
+                android:textSize="23dp" />
+
+            <ImageView
+                android:id="@+id/iv_edit_phone_number"
+                android:layout_width="40dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                android:paddingRight="15dp"
+                android:src="@drawable/pen_solid" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_back"
+                android:layout_width="165dp"
+                android:layout_height="73dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="124dp"
+                android:backgroundTint="@color/darkorange"
+                android:drawableRight="@drawable/baseline_turn_left_24"
+                android:text="Trở về"
+                android:textSize="29dp" />
+
+            <Button
+                android:id="@+id/btn_apply"
+                android:layout_width="176dp"
+                android:layout_height="71dp"
+                android:layout_marginStart="48dp"
+                android:backgroundTint="@color/darkorange"
+                android:drawableRight="@drawable/baseline_check_24"
+                android:paddingRight="5dp"
+                android:text="Áp dụng"
+                android:textSize="29dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
