@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="themNav" parent="">
-        <item name="listPreferredItemPaddingLeft">50dp</item>
-    </style>
+<!--    <style name="AppTheme">-->
+
+<!--    </style>-->
 </resources>

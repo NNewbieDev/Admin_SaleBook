@@ -13,6 +13,7 @@
     <string name="product_manager">Quản lý sản phẩm</string>
     <string name="home">Home</string>
     <string name="statistic">Thống kê</string>
+    <string name="best_seller">Thống kê bán chạy</string>
     <string name="database">Database</string>
     <string name="setting">Setting</string>
 </resources>

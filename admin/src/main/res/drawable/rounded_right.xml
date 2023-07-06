@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/blueAdmin"/>
+            <corners android:topRightRadius="40dp" android:bottomRightRadius="40dp" /> <!-- Adjust the corner radius to create the sausage shape -->
+            <size android:width="200dp" android:height="40dp" />
+        </shape>
+    </item>
+</selector>

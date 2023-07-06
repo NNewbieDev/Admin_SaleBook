@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/accountManager"
+        android:icon="@drawable/database_solid"
+        android:title="@string/account_manager"></item>
+    <item
+        android:id="@+id/categoryManager"
+        android:icon="@drawable/database_solid"
+        android:title="@string/category_manager"></item>
+    <item
+        android:id="@+id/productManager"
+        android:icon="@drawable/database_solid"
+        android:title="@string/product_manager"></item>
+</menu>

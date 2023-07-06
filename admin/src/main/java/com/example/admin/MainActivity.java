@@ -1,5 +1,6 @@
 package com.example.admin;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -9,13 +10,21 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
+import android.widget.Toast;
 
+import com.example.admin.fragment.FragAccountManager;
+import com.example.admin.fragment.FragCategoryManager;
 import com.example.admin.fragment.FragHome;
+import com.example.admin.fragment.FragProductManager;
 import com.example.admin.fragment.FragSetting;
 import com.google.android.material.navigation.NavigationView;
 
@@ -34,9 +43,10 @@ public class MainActivity extends AppCompatActivity {
         ConstraintLayout databaseItem = findViewById(R.id.database);
         ConstraintLayout statisticItem = findViewById(R.id.statistic);
         ConstraintLayout settingItem = findViewById(R.id.setting);
+//        set background transparent
         NavigationView navigationView = findViewById(R.id.customNav);
+        navigationView.setBackgroundColor(Color.TRANSPARENT);
         Toolbar customToolbar = findViewById(R.id.toolbar);
-
 //        Toolbar
         setSupportActionBar(customToolbar);
         ImageView iconMenu = findViewById(R.id.iconMenu);
@@ -44,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, mainLayout, customToolbar, 0, 0);
         mainLayout.addDrawerListener(toggle);
         toggle.setDrawerIndicatorEnabled(false);
+//        handle click menu to open nav
         iconMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -56,31 +67,65 @@ public class MainActivity extends AppCompatActivity {
         });
 //        Handle click nav items
         homeItem.setOnClickListener(view -> {
-            if(CurrenFrag != FHOME){
+            if (CurrenFrag != FHOME) {
                 replaceFrag(new FragHome());
                 CurrenFrag = FHOME;
-            }else {
+            } else {
                 mainLayout.closeDrawer(GravityCompat.START);
             }
 
         });
-//        databaseItem.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//            }
-//        });
-//        statisticItem.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//            }
-//        });
+        databaseItem.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.Q)
+            @Override
+            public void onClick(View view) {
+                PopupMenu popupMenuDatabase = new PopupMenu(MainActivity.this, databaseItem);
+                popupMenuDatabase.getMenuInflater().inflate(R.menu.menu_database, popupMenuDatabase.getMenu());
+                popupMenuDatabase.setForceShowIcon(true);
+                popupMenuDatabase.setOnMenuItemClickListener(menuItem -> {
+                    int idItem = menuItem.getItemId();
+                    if (idItem == R.id.accountManager) {
+                        replaceFrag(new FragAccountManager());
+                        return true;
+                    } else if (idItem == R.id.categoryManager) {
+                        replaceFrag(new FragCategoryManager());
+                        return true;
+                    } else if (idItem == R.id.productManager) {
+                        replaceFrag(new FragProductManager());
+                        return true;
+                    } else {
+                        return false;
+                    }
+
+                });
+                // Showing the popup menu
+                popupMenuDatabase.show();
+            }
+        });
+        statisticItem.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.Q)
+            @Override
+            public void onClick(View view) {
+                PopupMenu popupMenuStatistic = new PopupMenu(MainActivity.this, statisticItem);
+                popupMenuStatistic.getMenuInflater().inflate(R.menu.menu_statistic, popupMenuStatistic.getMenu());
+                popupMenuStatistic.setForceShowIcon(true);
+                popupMenuStatistic.setOnMenuItemClickListener(menuItem -> {
+                    int idItem = menuItem.getItemId();
+                    if(idItem == R.id.bestSeller){
+
+                        return true;
+                    }else {
+                        return false;
+                    }
+                });
+            }
+        });
+
         settingItem.setOnClickListener(view -> {
-            if(CurrenFrag != FSETTING){
+            if (CurrenFrag != FSETTING) {
                 replaceFrag(new FragSetting());
                 CurrenFrag = FSETTING;
-            }else {
+            } else {
                 mainLayout.closeDrawer(GravityCompat.START);
             }
         });
@@ -99,6 +144,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    // handle change fragment
     public void replaceFrag(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.contentLayout, fragment);

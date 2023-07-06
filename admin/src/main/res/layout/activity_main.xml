@@ -78,20 +78,19 @@
         <RelativeLayout
             android:id="@+id/contentLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
     </LinearLayout>
 
     <com.google.android.material.navigation.NavigationView
+        android:id="@+id/customNav"
         android:layout_width="70dp"
         android:layout_height="match_parent"
-        android:id="@+id/customNav"
-        android:layout_gravity="start"
-        android:background="@color/blueAdmin"
-        app:drawerLayoutCornerSize="30dp">
+        android:layout_gravity="start">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="70dp"
             android:layout_height="match_parent"
+            android:background="@color/blueAdmin"
             android:orientation="vertical">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -99,13 +98,14 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center_horizontal"
+
                 android:layout_marginTop="60dp"
                 android:background="@drawable/oval">
 
                 <ImageView
-                    android:contentDescription="@string/home"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
+                    android:contentDescription="@string/home"
                     android:src="@drawable/house_solid"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
@@ -124,8 +124,8 @@
 
                 <ImageView
                     android:layout_width="30dp"
-                    android:contentDescription="@string/database"
                     android:layout_height="30dp"
+                    android:contentDescription="@string/database"
                     android:src="@drawable/database_solid"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
@@ -144,8 +144,8 @@
 
                 <ImageView
                     android:layout_width="30dp"
-                    android:contentDescription="@string/statistic"
                     android:layout_height="30dp"
+                    android:contentDescription="@string/statistic"
                     android:src="@drawable/chart_simple_solid"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
@@ -172,8 +172,92 @@
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:tint="@color/blueAdmin" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+
         </LinearLayout>
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="@color/blueAdmin"-->
+<!--            android:layout_marginLeft="70dp"-->
+<!--            android:orientation="vertical">-->
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:padding="10dp">-->
+
+<!--                <ImageView-->
+<!--                    android:layout_width="24dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:layout_marginRight="10dp"-->
+<!--                    android:src="@drawable/database_solid"-->
+<!--                    android:contentDescription="@string/account_manager"-->
+<!--                    app:tint="@color/white" />-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:text="@string/account_manager"-->
+<!--                    android:textColor="@color/white"-->
+<!--                    android:textSize="24sp"-->
+<!--                    />-->
+<!--            </LinearLayout>-->
+<!--            <LinearLayout-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:padding="10dp">-->
+
+<!--                <ImageView-->
+<!--                    android:layout_width="24dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:layout_marginRight="10dp"-->
+<!--                    android:src="@drawable/database_solid"-->
+<!--                    app:tint="@color/white"-->
+<!--                    android:contentDescription="@string/product_manager"/>-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:text="@string/product_manager"-->
+<!--                    android:textColor="@color/white"-->
+<!--                    android:textSize="24sp"-->
+<!--                    />-->
+<!--            </LinearLayout>-->
+<!--            <LinearLayout-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:orientation="horizontal"-->
+<!--                android:padding="10dp">-->
+
+<!--                <ImageView-->
+<!--                    android:layout_width="24dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:layout_marginRight="10dp"-->
+<!--                    android:src="@drawable/database_solid"-->
+<!--                    android:contentDescription="@string/category_manager"-->
+<!--                    app:tint="@color/white" />-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:text="@string/category_manager"-->
+<!--                    android:textColor="@color/white"-->
+<!--                    android:textSize="24sp"-->
+<!--                    />-->
+<!--            </LinearLayout>-->
+<!--        </LinearLayout>-->
 
     </com.google.android.material.navigation.NavigationView>
 

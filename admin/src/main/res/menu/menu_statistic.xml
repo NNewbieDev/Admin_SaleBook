@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/bestSeller"
+        android:icon="@drawable/chart_simple_solid"
+        android:title="@string/best_seller"></item>
+</menu>

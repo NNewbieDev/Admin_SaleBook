@@ -3,4 +3,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="blueAdmin">#3187ED</color>
+<!--    <color name="transparent">#00CCC</color>-->
 </resources>
