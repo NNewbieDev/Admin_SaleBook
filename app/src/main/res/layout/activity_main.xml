@@ -14,15 +14,15 @@
     <EditText
         android:id="@+id/editTextTextEmailAddress"
         android:layout_width="329dp"
-        android:layout_height="41dp"
-        android:layout_marginTop="204dp"
-        android:background="#FFD966"
+        android:layout_height="55dp"
+        android:layout_marginTop="248dp"
+        android:background="@drawable/rounded_edittext"
         android:ems="10"
         android:hint="Nhập tên tài khoản"
+        android:paddingLeft="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <FrameLayout
         android:layout_width="wrap_content"
@@ -45,11 +45,12 @@
     <EditText
         android:id="@+id/editTextTextPassword"
         android:layout_width="329dp"
-        android:layout_height="41dp"
+        android:layout_height="55dp"
         android:layout_marginTop="44dp"
-        android:background="#FFD966"
+        android:background="@drawable/rounded_edittext"
         android:ems="10"
         android:hint="Nhập mật khẩu"
+        android:paddingLeft="20dp"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
