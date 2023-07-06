@@ -66,7 +66,7 @@
                 android:paddingStart="17dp"
                 android:paddingEnd="15dp"
                 android:text="Username1"
-                android:textColor="@color/white"
+                android:textColor="@color/lightorange"
                 android:textSize="23sp" />
 
             <ImageView
@@ -114,7 +114,7 @@
                     android:paddingStart="15dp"
                     android:paddingEnd="15dp"
                     android:text="A30, đường ABC"
-                    android:textColor="@color/white"
+                    android:textColor="@color/lightorange"
                     android:textSize="23sp" />
 
             </ScrollView>
@@ -159,7 +159,7 @@
                 android:paddingStart="17dp"
                 android:paddingEnd="15dp"
                 android:text="0909121212"
-                android:textColor="@color/white"
+                android:textColor="@color/lightorange"
                 android:textSize="23sp" />
 
             <ImageView
@@ -185,6 +185,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/darkorange"
+                android:textColor="@color/lightorange"
                 android:drawableRight="@drawable/baseline_turn_left_24"
                 android:text="Trở về"
                 android:textSize="29sp" />
@@ -195,6 +196,7 @@
                 android:layout_height="60dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
+                android:textColor="@color/lightorange"
                 android:layout_weight="1"
                 android:backgroundTint="@color/darkorange"
                 android:drawableRight="@drawable/baseline_check_24"
