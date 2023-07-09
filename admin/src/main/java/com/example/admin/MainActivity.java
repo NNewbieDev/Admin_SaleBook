@@ -22,27 +22,35 @@ import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import com.example.admin.fragment.FragAccountManager;
+import com.example.admin.fragment.FragBestSeller;
 import com.example.admin.fragment.FragCategoryManager;
 import com.example.admin.fragment.FragHome;
 import com.example.admin.fragment.FragProductManager;
 import com.example.admin.fragment.FragSetting;
+import com.example.admin.fragment.FragSignIn;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
     private DrawerLayout mainLayout;
     private static final int FHOME = 0;
     private static final int FSETTING = 1;
+    private static final int FACCOUNTMANAGER = 2;
+    private static final int FCATEGORYMANAGER = 3;
+    private static final int FPRODUCTMANAGER = 4;
+    private static final int FBESTSELLER = 5;
     private static int CurrenFrag = 0;
 
+    @RequiresApi(api = Build.VERSION_CODES.Q)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+//        declaration
         ConstraintLayout homeItem = findViewById(R.id.home);
         ConstraintLayout databaseItem = findViewById(R.id.database);
         ConstraintLayout statisticItem = findViewById(R.id.statistic);
         ConstraintLayout settingItem = findViewById(R.id.setting);
+        ImageView iconUser = findViewById(R.id.iconUser);
 //        set background transparent
         NavigationView navigationView = findViewById(R.id.customNav);
         navigationView.setBackgroundColor(Color.TRANSPARENT);
@@ -85,18 +93,36 @@ public class MainActivity extends AppCompatActivity {
                 popupMenuDatabase.setOnMenuItemClickListener(menuItem -> {
                     int idItem = menuItem.getItemId();
                     if (idItem == R.id.accountManager) {
-                        replaceFrag(new FragAccountManager());
-                        return true;
+                        if (CurrenFrag != FACCOUNTMANAGER) {
+                            replaceFrag(new FragAccountManager());
+                            CurrenFrag = FACCOUNTMANAGER;
+                            return true;
+                        } else {
+                            mainLayout.closeDrawer(GravityCompat.START);
+                            return false;
+                        }
                     } else if (idItem == R.id.categoryManager) {
-                        replaceFrag(new FragCategoryManager());
-                        return true;
+                        if (CurrenFrag != FCATEGORYMANAGER) {
+                            replaceFrag(new FragCategoryManager());
+                            CurrenFrag = FCATEGORYMANAGER;
+                            return true;
+                        } else {
+                            mainLayout.closeDrawer(GravityCompat.START);
+                            return false;
+                        }
                     } else if (idItem == R.id.productManager) {
-                        replaceFrag(new FragProductManager());
-                        return true;
+                        if(CurrenFrag != FPRODUCTMANAGER){
+                            replaceFrag(new FragProductManager());
+                            CurrenFrag = FPRODUCTMANAGER;
+                            return true;
+                        }else {
+                            mainLayout.closeDrawer(GravityCompat.START);
+                            return false;
+                        }
                     } else {
+                        mainLayout.closeDrawer(GravityCompat.START);
                         return false;
                     }
-
                 });
                 // Showing the popup menu
                 popupMenuDatabase.show();
@@ -111,13 +137,22 @@ public class MainActivity extends AppCompatActivity {
                 popupMenuStatistic.setForceShowIcon(true);
                 popupMenuStatistic.setOnMenuItemClickListener(menuItem -> {
                     int idItem = menuItem.getItemId();
-                    if(idItem == R.id.bestSeller){
-
-                        return true;
-                    }else {
+                    if (idItem == R.id.bestSeller) {
+                        if(CurrenFrag != FBESTSELLER) {
+                            replaceFrag(new FragBestSeller());
+                            CurrenFrag = FBESTSELLER;
+                            return true;
+                        }
+                        else {
+                            mainLayout.closeDrawer(GravityCompat.START);
+                            return false;
+                        }
+                    } else {
+                        mainLayout.closeDrawer(GravityCompat.START);
                         return false;
                     }
                 });
+                popupMenuStatistic.show();
             }
         });
 
@@ -128,6 +163,22 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 mainLayout.closeDrawer(GravityCompat.START);
             }
+        });
+        iconUser.setOnClickListener(view -> {
+            PopupMenu popupMenuUser = new PopupMenu(MainActivity.this, iconUser);
+            popupMenuUser.getMenuInflater().inflate(R.menu.menu_user, popupMenuUser.getMenu());
+            popupMenuUser.setForceShowIcon(true);
+            popupMenuUser.setOnMenuItemClickListener(menuItem -> {
+                int idItem = menuItem.getItemId();
+                if(idItem == R.id.userSignIn ){
+                    replaceFrag(new FragSignIn());
+                    return true;
+                }
+                else if(idItem == R.id.userSignUp){
+                    return true;
+                }
+                return false;
+            });
         });
 // Add to Activity
         toggle.syncState();

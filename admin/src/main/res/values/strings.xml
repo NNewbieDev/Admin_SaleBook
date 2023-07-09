@@ -16,4 +16,6 @@
     <string name="best_seller">Thống kê bán chạy</string>
     <string name="database">Database</string>
     <string name="setting">Setting</string>
+    <string name="sign_in">Đăng nhập</string>
+    <string name="sign_up">Đăng ký</string>
 </resources>
