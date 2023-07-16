@@ -28,7 +28,7 @@
         app:tint="@color/darkorange" />
 
     <EditText
-        android:id="@+id/et_ten_tk"
+        android:id="@+id/et_user_name"
         android:layout_width="280dp"
         android:layout_height="54dp"
         android:layout_marginTop="28dp"
@@ -51,11 +51,12 @@
         android:layout_marginTop="12dp"
         android:background="@drawable/rounded_edittext"
         android:hint="Mật khẩu"
+        android:inputType="textPassword"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_ten_tk"
+        app:layout_constraintTop_toBottomOf="@id/et_user_name"
         android:drawableStart="@drawable/baseline_vpn_key_24"
         android:drawablePadding="17dp"
         android:paddingStart="15dp"
@@ -68,6 +69,7 @@
         android:layout_marginTop="12dp"
         android:background="@drawable/rounded_edittext"
         android:hint="Xác nhận mật khẩu"
+        android:inputType="textPassword"
         android:paddingStart="53dp"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -76,7 +78,7 @@
         app:layout_constraintTop_toBottomOf="@id/et_password" />
 
     <EditText
-        android:id="@+id/et_sdt"
+        android:id="@+id/et_phone_number"
         android:layout_width="280dp"
         android:layout_height="54dp"
         android:layout_marginTop="12dp"
@@ -101,7 +103,7 @@
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_sdt"
+        app:layout_constraintTop_toBottomOf="@id/et_phone_number"
         android:drawableStart="@drawable/baseline_add_location_24"
         android:drawablePadding="17dp"
         android:paddingStart="15dp"
