@@ -35,16 +35,16 @@
                 android:layout_height="43dp"
                 android:gravity="center"
                 android:text="Tổng đơn hàng"
-                android:textColor="@color/white"
+                android:textColor="@color/lightorange"
                 android:textSize="23dp" />
 
             <TextView
                 android:id="@+id/tv_total_money"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="55dp"
                 android:gravity="center"
                 android:text="1,260,620đ"
-                android:textColor="@color/white"
+                android:textColor="@color/lightorange"
                 android:textSize="23dp" />
         </LinearLayout>
 

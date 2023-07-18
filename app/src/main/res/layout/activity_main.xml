@@ -15,7 +15,7 @@
         android:id="@+id/editTextTextEmailAddress"
         android:layout_width="329dp"
         android:layout_height="55dp"
-        android:layout_marginTop="248dp"
+        android:layout_marginTop="252dp"
         android:background="@drawable/rounded_edittext"
         android:ems="10"
         android:hint="Nhập tên tài khoản"
@@ -57,32 +57,43 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress"
         app:layout_constraintVertical_bias="0.5" />
 
+
+    <CheckBox
+        android:id="@+id/cb_show_password"
+        android:layout_width="206dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="16dp"
+        android:text="Hiện mật khẩu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
+
     <Button
         android:id="@+id/btn_login"
         android:layout_width="244dp"
         android:layout_height="55dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/darkorange"
         android:text="Đăng nhập"
         android:textSize="23dp"
-        android:backgroundTint="@color/darkorange"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
-
+        app:layout_constraintTop_toBottomOf="@+id/cb_show_password" />
 
     <Button
         android:id="@+id/buttonRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="28dp"
         android:background="@android:color/transparent"
         android:text="Đăng ký tài khoản"
         android:textColor="#DFA67B"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_login"
-        app:layout_constraintVertical_bias="0.5" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_login" />
 
     <Button
         android:id="@+id/buttonForgotPassword"
@@ -93,8 +104,9 @@
         android:text="Quên mật khẩu?"
         android:textColor="#DFA67B"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonRegister"
-        app:layout_constraintVertical_bias="0.5" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonRegister" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
