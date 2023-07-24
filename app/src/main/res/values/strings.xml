@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">SaleBook</string>
+    <string name="open_nav">open navigation</string>
+    <string name="close_nav">close navigation</string>
+    <string name="icon_menu">icon menu</string>
+    <string name="icon_user">icon user</string>
+    <string name="logo">Admin</string>
+    <string name="username">Login: root</string>
+    <string name="password">Password: ***</string>
+    <string name="identify_user">identify user</string>
+    <string name="account_manager">Quản lý tài khoản</string>
+    <string name="category_manager">Quản lý danh mục</string>
+    <string name="product_manager">Quản lý sản phẩm</string>
+    <string name="home">Home</string>
+    <string name="statistic">Thống kê</string>
+    <string name="best_seller">Thống kê bán chạy</string>
+    <string name="database">Database</string>
+    <string name="setting">Setting</string>
+    <string name="sign_in">Đăng nhập</string>
+    <string name="sign_up">Đăng ký</string>
 </resources>
