@@ -11,10 +11,11 @@ import androidx.fragment.app.Fragment;
 
 import com.example.salebook.R;
 
-public class FragSetting extends Fragment {
+public class FragSignUp extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.f_setting, container, false);
+        View layout = inflater.inflate(R.layout.form_sign_up, container, false);
+        return layout;
     }
 }

@@ -76,10 +76,16 @@
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.AppBarLayout>
 
-        <RelativeLayout
-            android:id="@+id/contentLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+<!--        <ScrollView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:scrollbars="vertical">-->
+
+<!--        </ScrollView>-->
+            <RelativeLayout
+                android:id="@+id/contentLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
     </LinearLayout>
 
     <com.google.android.material.navigation.NavigationView
@@ -154,112 +160,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:tint="@color/blueAdmin" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/setting"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/oval">
-
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:contentDescription="@string/setting"
-                    android:src="@drawable/gear_solid"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:tint="@color/blueAdmin" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
         </LinearLayout>
-
-        <!--        <LinearLayout-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:background="@color/blueAdmin"-->
-        <!--            android:layout_marginLeft="70dp"-->
-        <!--            android:orientation="vertical">-->
-
-        <!--            <LinearLayout-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:orientation="horizontal"-->
-        <!--                android:padding="10dp">-->
-
-        <!--                <ImageView-->
-        <!--                    android:layout_width="24dp"-->
-        <!--                    android:layout_height="wrap_content"-->
-        <!--                    android:layout_gravity="center"-->
-        <!--                    android:layout_marginRight="10dp"-->
-        <!--                    android:src="@drawable/database_solid"-->
-        <!--                    android:contentDescription="@string/account_manager"-->
-        <!--                    app:tint="@color/white" />-->
-
-        <!--                <TextView-->
-        <!--                    android:layout_width="wrap_content"-->
-        <!--                    android:layout_height="wrap_content"-->
-        <!--                    android:layout_gravity="center"-->
-        <!--                    android:text="@string/account_manager"-->
-        <!--                    android:textColor="@color/white"-->
-        <!--                    android:textSize="24sp"-->
-        <!--                    />-->
-        <!--            </LinearLayout>-->
-        <!--            <LinearLayout-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:orientation="horizontal"-->
-        <!--                android:padding="10dp">-->
-
-        <!--                <ImageView-->
-        <!--                    android:layout_width="24dp"-->
-        <!--                    android:layout_height="wrap_content"-->
-        <!--                    android:layout_gravity="center"-->
-        <!--                    android:layout_marginRight="10dp"-->
-        <!--                    android:src="@drawable/database_solid"-->
-        <!--                    app:tint="@color/white"-->
-        <!--                    android:contentDescription="@string/product_manager"/>-->
-
-        <!--                <TextView-->
-        <!--                    android:layout_width="wrap_content"-->
-        <!--                    android:layout_height="wrap_content"-->
-        <!--                    android:layout_gravity="center"-->
-        <!--                    android:text="@string/product_manager"-->
-        <!--                    android:textColor="@color/white"-->
-        <!--                    android:textSize="24sp"-->
-        <!--                    />-->
-        <!--            </LinearLayout>-->
-        <!--            <LinearLayout-->
-        <!--                android:layout_width="wrap_content"-->
-        <!--                android:layout_height="wrap_content"-->
-        <!--                android:orientation="horizontal"-->
-        <!--                android:padding="10dp">-->
-
-        <!--                <ImageView-->
-        <!--                    android:layout_width="24dp"-->
-        <!--                    android:layout_height="wrap_content"-->
-        <!--                    android:layout_gravity="center"-->
-        <!--                    android:layout_marginRight="10dp"-->
-        <!--                    android:src="@drawable/database_solid"-->
-        <!--                    android:contentDescription="@string/category_manager"-->
-        <!--                    app:tint="@color/white" />-->
-
-        <!--                <TextView-->
-        <!--                    android:layout_width="wrap_content"-->
-        <!--                    android:layout_height="wrap_content"-->
-        <!--                    android:layout_gravity="center"-->
-        <!--                    android:text="@string/category_manager"-->
-        <!--                    android:textColor="@color/white"-->
-        <!--                    android:textSize="24sp"-->
-        <!--                    />-->
-        <!--            </LinearLayout>-->
-        <!--        </LinearLayout>-->
-
     </com.google.android.material.navigation.NavigationView>
 
 

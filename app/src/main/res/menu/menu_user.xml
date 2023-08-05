@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    >
     <item
         android:id="@+id/userSignIn"
         android:icon="@drawable/user_solid"
+        android:iconTint="@color/blueAdmin"
         android:title="@string/sign_in"></item>
     <item
         android:id="@+id/userSignUp"
+        android:iconTint="@color/blueAdmin"
         android:icon="@drawable/user_solid"
         android:title="@string/sign_up"></item>
 </menu>
