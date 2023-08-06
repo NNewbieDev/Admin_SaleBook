@@ -8,6 +8,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -31,7 +32,9 @@ public class AdminActivity extends AppCompatActivity {
     private static final int FCATEGORYMANAGER = 2;
     private static final int FPRODUCTMANAGER = 3;
     private static final int FBESTSELLER = 4;
-    private static int CurrenFrag;
+    private static final int FSIGNIN = 5;
+    private static final int FSIGNUP = 6;
+    private static int CurrenFrag = 0;
     private ConstraintLayout homeItem;
     private ConstraintLayout statisticItem;
     private ConstraintLayout databaseItem;
@@ -40,6 +43,7 @@ public class AdminActivity extends AppCompatActivity {
     private NavigationView navigationView;
     private Toolbar customToolbar;
     protected ImageView iconMenu;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,9 +54,6 @@ public class AdminActivity extends AppCompatActivity {
         registerForContextMenu(iconUser);
         registerForContextMenu(databaseItem);
         registerForContextMenu(statisticItem);
-
-
-
 //        declaration
         homeItem = findViewById(R.id.home);
 //        set background transparent
@@ -85,7 +86,6 @@ public class AdminActivity extends AppCompatActivity {
             } else {
                 mainLayout.closeDrawer(GravityCompat.START);
             }
-
         });
 // Add to Activity
         toggle.syncState();
@@ -95,11 +95,11 @@ public class AdminActivity extends AppCompatActivity {
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
-        if(v.getId() == R.id.iconUser) {
+        if (v.getId() == R.id.iconUser) {
             getMenuInflater().inflate(R.menu.menu_user, menu);
-        }else if (v.getId() == R.id.database) {
+        } else if (v.getId() == R.id.database) {
             getMenuInflater().inflate(R.menu.menu_database, menu);
-        }else if(v.getId() == R.id.statistic){
+        } else if (v.getId() == R.id.statistic) {
             getMenuInflater().inflate(R.menu.menu_statistic, menu);
         }
     }
@@ -144,15 +144,24 @@ public class AdminActivity extends AppCompatActivity {
                 return false;
             }
         } else if (id == R.id.userSignIn) {
-            replaceFrag(new FragSignIn());
-            return true;
+            if (CurrenFrag != FSIGNIN) {
+                replaceFrag(new FragSignIn());
+                CurrenFrag = FSIGNIN;
+                return true;
+            } else {
+                return false;
+            }
         } else if (id == R.id.userSignUp) {
-            replaceFrag(new FragSignUp());
-            return true;
+            if (CurrenFrag != FSIGNIN) {
+                replaceFrag(new FragSignUp());
+                CurrenFrag = FSIGNUP;
+                return true;
+            } else {
+                return false;
+            }
         } else {
             return super.onContextItemSelected(item);
         }
-
     }
 
     @Override

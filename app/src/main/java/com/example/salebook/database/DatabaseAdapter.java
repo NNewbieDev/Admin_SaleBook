@@ -115,4 +115,6 @@ public class DatabaseAdapter extends SQLiteOpenHelper {
         db.close();
         return userList;
     }
+
+
 }

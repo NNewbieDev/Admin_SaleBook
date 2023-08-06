@@ -57,6 +57,7 @@ public class FragHome extends Fragment {
 
         userAdapter = new UserAdapter();
         userList = db.getAllData();
+
         userAdapter.setData(userList);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(layout.getContext());
         recyclerView.setLayoutManager(linearLayoutManager);

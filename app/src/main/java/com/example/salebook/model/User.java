@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,8 +42,8 @@ public class User {
         SQLiteDatabase db = adapter.getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        TextView txtUsername = view.findViewById(R.id.inputUsername);
-        TextView txtPassword = view.findViewById(R.id.inputPassword);
+        EditText txtUsername = view.findViewById(R.id.inputUsername);
+        EditText txtPassword = view.findViewById(R.id.inputPassword);
         String username = txtUsername.getText().toString().trim();
         String password = txtPassword.getText().toString().trim();
 
@@ -57,8 +58,8 @@ public class User {
             Toast.makeText(view.getContext(), "Them thanh cong", Toast.LENGTH_SHORT).show();
         }
         db.close();
-        list = adapter.getAllData();
-        userAdapter.setData(list);
+//        list = adapter.getAllData();
+//        userAdapter.setData(list);
     }
 
     public int getUserId() {

@@ -70,7 +70,7 @@
         android:orientation="horizontal">
 
         <EditText
-            android:id="@+id/cofirmPassword"
+            android:id="@+id/confirmPassword"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginLeft="10dp"
@@ -84,7 +84,7 @@
             android:paddingVertical="10dp" />
     </LinearLayout>
     <Button
-        android:id="@+id/signInBtn"
+        android:id="@+id/signUpBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/white"
