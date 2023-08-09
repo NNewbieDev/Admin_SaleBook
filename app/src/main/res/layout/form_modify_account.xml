@@ -40,7 +40,7 @@
             android:layout_marginBottom="20dp"
             android:gravity="center_horizontal"
             android:paddingVertical="10dp"
-            android:text="Thêm Danh Mục"
+            android:text="Tùy chỉnh"
             android:textColor="@color/white"
             android:textSize="36sp"
             android:textStyle="bold" />
@@ -56,14 +56,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:background="@drawable/rounded_horizontal"
-                android:drawableStart="@drawable/book_solid_24"
+                android:drawableStart="@drawable/user_solid_24"
                 android:drawablePadding="10dp"
                 android:drawableTint="@color/blueAdmin"
-                android:hint="Tên danh mục"
+                android:hint="Tên tài khoản"
                 android:paddingHorizontal="20dp"
                 android:paddingVertical="10dp" />
         </LinearLayout>
-
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:orientation="horizontal">
+            <Spinner
+                android:id="@+id/spinRole"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="10dp"
+                android:background="@drawable/rounded_horizontal"/>
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -85,14 +97,29 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_gravity="center_horizontal"
+                    android:drawableEnd="@drawable/check_solid_35"
                     android:drawablePadding="8dp"
                     android:drawableTint="@color/blueAdmin"
-                    android:text="Thêm"
+                    android:text="Áp dụng"
                     android:textColor="@color/blueAdmin"
                     android:textSize="25sp"
                     android:textStyle="bold" />
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/delAccountBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:drawableEnd="@drawable/trash_solid"
+                android:drawablePadding="10dp"
+                android:drawableTint="@color/white"
+                android:text="Xóa tài khoản"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
     </LinearLayout>

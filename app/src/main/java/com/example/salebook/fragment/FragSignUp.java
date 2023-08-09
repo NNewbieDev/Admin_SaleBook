@@ -45,15 +45,13 @@ public class FragSignUp extends Fragment {
             String username = inputUsername.getText().toString().trim();
             String password = inputPassword.getText().toString().trim();
             String confirm = confirmPassword.getText().toString().trim();
-
             if(username.equals("") || password.equals("") || confirm.equals("")){
                 Toast.makeText(layout.getContext(), "Điền thiếu thông tin", Toast.LENGTH_SHORT).show();
             }else if(!confirm.equals(password)){
                 Toast.makeText(layout.getContext(), "Mật khẩu không trùng khớp", Toast.LENGTH_SHORT).show();
             }else {
-                User newUser = new User();
-                newUser.addUser(userAdapter, userList, layout);
-
+                db.addUser(username, password);
+                userAdapter.notifyDataSetChanged();
             }
         });
         return layout;

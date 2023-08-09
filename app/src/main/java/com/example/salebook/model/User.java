@@ -37,30 +37,7 @@ public class User {
         this.password = password;
     }
 
-    public void addUser(UserAdapter userAdapter, List<User> list, View view) {
-        DatabaseAdapter adapter = new DatabaseAdapter(view.getContext());
-        SQLiteDatabase db = adapter.getWritableDatabase();
-        ContentValues values = new ContentValues();
 
-        EditText txtUsername = view.findViewById(R.id.inputUsername);
-        EditText txtPassword = view.findViewById(R.id.inputPassword);
-        String username = txtUsername.getText().toString().trim();
-        String password = txtPassword.getText().toString().trim();
-
-        values.put("username", username);
-        values.put("password", password);
-
-        long newRow = db.insert("User", null, values);
-
-        if (newRow == -1) {
-            Toast.makeText(view.getContext(), "Them khong thanh cong", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(view.getContext(), "Them thanh cong", Toast.LENGTH_SHORT).show();
-        }
-        db.close();
-//        list = adapter.getAllData();
-//        userAdapter.setData(list);
-    }
 
     public int getUserId() {
         return userId;

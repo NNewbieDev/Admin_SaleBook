@@ -25,14 +25,15 @@ import com.example.salebook.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
+
 // cách làm không đổi
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder> {
-   private List<User> userList;
+    private List<User> userList;
 
-   public void setData (List<User> list){
-       this.userList = list;
-       notifyDataSetChanged();
-   }
+    public void setData(List<User> list) {
+        this.userList = list;
+        notifyDataSetChanged();
+    }
 
     @NonNull
     @Override
@@ -44,31 +45,35 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     @Override
     public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
         User user = userList.get(position);
-        if(userList == null){
+        if (userList == null) {
             return;
         }
         holder.labelUsername.setText(user.getUsername());
-        holder.labelPassword.setText(user.getPassword());
+        holder.labelPassword.setText("*****");
         holder.viewAccount.setOnClickListener(view -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(holder.itemView.getContext());
-
             View dialogView = LayoutInflater.from(holder.itemView.getContext()).inflate(R.layout.form_sign_in, null);
             builder.setView(dialogView);
-            builder.setView(dialogView);
-
-            EditText ipUsername = dialogView.findViewById(R.id.inputUsername);
-            EditText ipPassword = dialogView.findViewById(R.id.inputPassword);
 
             Button signInBtn = dialogView.findViewById(R.id.signInBtn);
-            signInBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                }
-            });
+            EditText inputUsername = dialogView.findViewById(R.id.inputUsername);
+            inputUsername.setText(user.getUsername());
+            EditText inputPassword = dialogView.findViewById(R.id.inputPassword);
 
             // Create and show the dialog
             AlertDialog dialog = builder.create();
+            signInBtn.setOnClickListener(btn -> {
+                DatabaseAdapter db = new DatabaseAdapter(holder.itemView.getContext());
+                String password = inputPassword.getText().toString().trim();
+                User checkUser = db.getUserByUsernameAndPassword(user.getUsername(), password);
+                if(checkUser == null)
+                {
+                    Toast.makeText(dialogView.getContext(), "Tài khoản không tồn tại" , Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(dialogView.getContext(), "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                }
+            });
             dialog.show();
         });
     }
@@ -76,7 +81,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
 
     @Override
     public int getItemCount() {
-        if(userList != null){
+        if (userList != null) {
             return userList.size();
         }
         return 0;
@@ -86,9 +91,9 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
         private TextView labelUsername;
         private TextView labelPassword;
         private LinearLayout viewAccount;
+
         public UserViewHolder(@NonNull View itemView) {
             super(itemView);
-
             labelUsername = itemView.findViewById(R.id.labelUsername);
             labelPassword = itemView.findViewById(R.id.labelPassword);
             viewAccount = itemView.findViewById(R.id.accountUser);

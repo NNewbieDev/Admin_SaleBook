@@ -38,7 +38,6 @@ public class AdminActivity extends AppCompatActivity {
     private ConstraintLayout homeItem;
     private ConstraintLayout statisticItem;
     private ConstraintLayout databaseItem;
-    private ConstraintLayout settingItem;
     private ImageView iconUser;
     private NavigationView navigationView;
     private Toolbar customToolbar;
@@ -48,6 +47,7 @@ public class AdminActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
+//        Context
         iconUser = findViewById(R.id.iconUser);
         databaseItem = findViewById(R.id.database);
         statisticItem = findViewById(R.id.statistic);
