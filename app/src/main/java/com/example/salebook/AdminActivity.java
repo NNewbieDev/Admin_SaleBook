@@ -92,15 +92,6 @@ public class AdminActivity extends AppCompatActivity {
         toggle.syncState();
         replaceFrag(new FragHome());
     }
-
-        @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_user, menu);
-        return true;
-    }
-
-
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);

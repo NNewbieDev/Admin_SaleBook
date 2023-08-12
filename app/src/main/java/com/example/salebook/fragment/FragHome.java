@@ -48,43 +48,20 @@ public class FragHome extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View layout = inflater.inflate(R.layout.f_home, container, false);
-        View layoutItem = inflater.inflate(R.layout.f_home_item, container, false);
 
-        signInLayout = layoutItem.findViewById(R.id.accountUser);
         recyclerView = layout.findViewById(R.id.listViewAccount);
-
         db = new DatabaseAdapter(layout.getContext());
-
         userAdapter = new UserAdapter();
-        userList = db.getAdminAccount();
 
+        userList = db.getAdminAccount();
         userAdapter.setData(userList);
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(layout.getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(userAdapter);
 
         return layout;
     }
-//    public void showLoginDialog() {
-//        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-//
-//        View dialogView = getLayoutInflater().inflate(R.layout.form_sign_in, null);
-//        builder.setView(dialogView);
-//
-//        EditText ipUsername = dialogView.findViewById(R.id.inputUsername);
-//        EditText ipPassword = dialogView.findViewById(R.id.inputPassword);
-//
-//        Button signInBtn = dialogView.findViewById(R.id.signInBtn);
-//        signInBtn.setOnClickListener(view -> {
-//            String msg = "";
-//
-//            Toast.makeText(this.getContext(), msg, Toast.LENGTH_SHORT).show();
-//        });
-//
-//        // Create and show the dialog
-//        AlertDialog dialog = builder.create();
-//        dialog.show();
-//    }
 }
 
 
