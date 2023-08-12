@@ -255,6 +255,20 @@ public class DatabaseAdapter extends SQLiteOpenHelper {
         return newRow == -1 ? false : true;
     }
 
+    public void themUser(User user) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(COL_USERNAME, user.getUsername());
+        values.put(COL_PASSWORD, user.getPassword());
+        values.put(COL_EMAIL, user.getEmail());
+        values.put(COL_ADDRESS, user.getAddress());
+        values.put(COL_PHONE, user.getPhone());
+
+        long newRowId = db.insert(TABLE_USER, null, values);
+        db.close();
+    }
+
     public boolean updateUserInfo(String username, int newRole) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();

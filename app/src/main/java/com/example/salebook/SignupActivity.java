@@ -3,6 +3,7 @@ package com.example.salebook;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
@@ -14,6 +15,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.salebook.database.DatabaseAdapter;
+import com.example.salebook.model.User;
+
+import java.util.List;
+
 public class SignupActivity extends AppCompatActivity {
 
     private Button btnLogin;
@@ -24,6 +30,8 @@ public class SignupActivity extends AppCompatActivity {
     private EditText etPhoneNumber;
     private EditText etAddress;
     private CheckBox cbShowPassword;
+    private DatabaseAdapter databaseAdapter;
+    private User user = new User();
 
 
     @Override
@@ -31,6 +39,7 @@ public class SignupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
         AnhXa();
+        databaseAdapter = new DatabaseAdapter(this);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,6 +77,8 @@ public class SignupActivity extends AppCompatActivity {
                 Intent intent = new Intent(SignupActivity.this, MainActivity.class);
                 if(etUserName.getText().toString().isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Vui lòng nhập tên đăng nhập!", Toast.LENGTH_SHORT).show();
+                } else if (!checkUserName(etUserName.getText().toString())) {
+                    Toast.makeText(getApplicationContext(), "Tên đăng nhập đã tồn tại!", Toast.LENGTH_SHORT).show();
                 } else if (etPassword.getText().toString().isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Vui lòng nhập mật khẩu!", Toast.LENGTH_SHORT).show();
                 } else if (etCfPassword.getText().toString().isEmpty()) {
@@ -82,6 +93,13 @@ public class SignupActivity extends AppCompatActivity {
                 } else {
                     startActivity(intent);
                     Toast.makeText(getApplicationContext(), "Đăng ký tài khoản thành công!", Toast.LENGTH_SHORT).show();
+                    user.setUsername(etUserName.getText().toString());
+                    user.setPassword(etPassword.getText().toString());
+                    user.setAddress(etAddress.getText().toString());
+                    user.setPhone(etPhoneNumber.getText().toString());
+                    user.setEmail(null);
+                    databaseAdapter.themUser(user);
+
                 }
 
             }
@@ -96,5 +114,15 @@ public class SignupActivity extends AppCompatActivity {
         etPhoneNumber = (EditText) findViewById(R.id.et_phone_number);
         etAddress = (EditText) findViewById(R.id.et_address);
         cbShowPassword = (CheckBox) findViewById(R.id.cb_show_password);
+    }
+    public boolean checkUserName(String username){
+        List<User> userList = databaseAdapter.getAllData();
+        for (User u : userList) {
+            if (username.equals(u.getUsername().toString())) {
+                return false;
+            }
+
+        }
+        return true;
     }
 }
