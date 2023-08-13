@@ -41,10 +41,13 @@ public class FragAccountManager extends Fragment {
         View layout = inflater.inflate(R.layout.f_account_manager, container, false);
 
         listAccountManager = layout.findViewById(R.id.listAccountManager);
+
         userManagerAdapter = new UserManagerAdapter();
         db = new DatabaseAdapter(layout.getContext());
         userList = db.getAllData();
+
         userManagerAdapter.setData(userList);
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(layout.getContext());
         listAccountManager.setLayoutManager(linearLayoutManager);
         listAccountManager.setAdapter(userManagerAdapter);
@@ -74,7 +77,7 @@ public class FragAccountManager extends Fragment {
                     if(db.addUser(username, password)){
                         Toast.makeText(layout.getContext(), "Đã thêm", Toast.LENGTH_SHORT).show();
                     }else {
-
+                        Toast.makeText(layout.getContext(), "Thêm thất bại", Toast.LENGTH_SHORT).show();
                     }
                     userList.add(new User(username, password));
 
