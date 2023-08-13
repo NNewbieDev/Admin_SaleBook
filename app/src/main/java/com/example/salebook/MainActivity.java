@@ -6,9 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -18,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.salebook.database.DatabaseAdapter;
+import com.example.salebook.model.Role;
 import com.example.salebook.model.User;
 
 import java.util.List;
@@ -57,8 +60,11 @@ public class MainActivity extends AppCompatActivity {
 
                 String userName = etUsername.getText().toString();
                 String pass = etPassword.getText().toString();
-                if (checkLogin(userName, pass)) {
+                if (checkLogin(userName, pass) == 1) {
                     Intent intent = new Intent(MainActivity.this, SalesActivity.class);
+                    startActivity(intent);
+                } else if (checkLogin(userName, pass) == 2) {
+                    Intent intent = new Intent(MainActivity.this, AdminActivity.class);
                     startActivity(intent);
                 } else {
                     Toast.makeText(getApplicationContext(), "Tên tài khoản hoặc mật khẩu không đúng", Toast.LENGTH_SHORT).show();
@@ -87,15 +93,19 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public boolean checkLogin(String user, String pasword) {
-        List<User> userList = databaseAdapter.getAllData();
+    public int checkLogin(String user, String pasword) {
+        List<User> userList = databaseAdapter.getUser();
         for (User u : userList) {
-            if (user.equals(u.getUsername().toString()) && pasword.equals(u.getPassword().toString())) {
-                return true;
+            Log.d("Tag", "Giá trị Role: " + u.getRoleId().getRoleId());
+            if (user.equals(u.getUsername().toString()) && pasword.equals(u.getPassword().toString()) &&
+                    u.getRoleId().getRoleId() == 2) {
+                return 2;
+            } else if (user.equals(u.getUsername().toString()) && pasword.equals(u.getPassword().toString())) {
+                return 1;
             }
 
         }
-        return false;
+        return 0;
     }
 
     public void Anhxa() {

@@ -56,9 +56,10 @@ public class FragAccountManager extends Fragment {
 
         btnAdd.setOnClickListener(view -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-
             View dialogView = getLayoutInflater().inflate(R.layout.form_sign_up, null);
             builder.setView(dialogView);
+
+            AlertDialog dialog = builder.create();
 
             inputUsername = dialogView.findViewById(R.id.inputUsername);
             inputPassword = dialogView.findViewById(R.id.inputPassword);
@@ -74,17 +75,18 @@ public class FragAccountManager extends Fragment {
                 } else if (!confirm.equals(password)) {
                     Toast.makeText(layout.getContext(), "Mật khẩu không trùng khớp", Toast.LENGTH_SHORT).show();
                 } else {
-                    if(db.addUser(username, password)){
+                    if (db.addUser(username, password)) {
                         Toast.makeText(layout.getContext(), "Đã thêm", Toast.LENGTH_SHORT).show();
-                    }else {
+                        userList.add(new User(username, password));
+                        userManagerAdapter.setData(userList);
+                        dialog.dismiss();
+                    } else {
                         Toast.makeText(layout.getContext(), "Thêm thất bại", Toast.LENGTH_SHORT).show();
                     }
-                    userList.add(new User(username, password));
 
                 }
             });
             // Create and show the dialog
-            AlertDialog dialog = builder.create();
             dialog.show();
         });
 

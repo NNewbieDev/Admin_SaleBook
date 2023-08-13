@@ -60,6 +60,8 @@ public class FragCategoryManager extends Fragment {
             View dialogView = getLayoutInflater().inflate(R.layout.form_category, null);
             builder.setView(dialogView);
 
+            AlertDialog dialog = builder.create();
+
             inputCateName = dialogView.findViewById(R.id.inputCateName);
             addCate = dialogView.findViewById(R.id.addCate);
 
@@ -71,15 +73,16 @@ public class FragCategoryManager extends Fragment {
                 } else {
                     if (db.addCate(cateName)) {
                         Toast.makeText(layout.getContext(), "Đã thêm", Toast.LENGTH_SHORT).show();
+                        categoryList.add(new Category(cateName));
+                        categoryAdapter.setData(categoryList);
+                        dialog.dismiss();
                     } else {
                         Toast.makeText(layout.getContext(), "Thêm thất bại", Toast.LENGTH_SHORT).show();
                     }
-                    categoryList.add(new Category(cateName));
                 }
             });
 
             closeBtn = dialogView.findViewById(R.id.closeDialog);
-            AlertDialog dialog = builder.create();
             closeBtn.setOnClickListener(close -> {
                 dialog.dismiss();
             });

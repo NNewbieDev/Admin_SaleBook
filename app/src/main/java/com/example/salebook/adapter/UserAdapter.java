@@ -70,7 +70,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
                 {
                     Toast.makeText(dialogView.getContext(), "Tài khoản không tồn tại" , Toast.LENGTH_SHORT).show();
                 }else {
-                    Toast.makeText(dialogView.getContext(), "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(dialogView.getContext(), checkUser.getRoleId().getRoleName(), Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
                 }
             });

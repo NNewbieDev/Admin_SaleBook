@@ -190,11 +190,42 @@ public class DatabaseAdapter extends SQLiteOpenHelper {
         return userList;
     }
     @SuppressLint("Range")
+    public List<User> getUser() {
+        List<User> userList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE_USER;
+        Cursor cursor = db.rawQuery(query, null);
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                // Retrieve data from the cursor and create YourDataModel objects
+                User data = new User();
+                data.setUsername(cursor.getString(cursor.getColumnIndex(COL_USERNAME)));
+                data.setPassword(cursor.getString(cursor.getColumnIndex(COL_PASSWORD)));
+
+//                data.setPassword(cursor.getString(cursor.getColumnIndex(COL_PASSWORD)));
+//                data.setPassword(cursor.getString(cursor.getColumnIndex(COL_PASSWORD)));
+                int roleId = cursor.getInt(cursor.getColumnIndex(COL_ROLE_ID));
+
+                // Tạo và gán đối tượng Role cho User
+                Role role = new Role();
+                role.setRoleId(roleId);
+                data.setRoleId(role);
+
+                // Set other properties of the data model
+                userList.add(data);
+            } while (cursor.moveToNext());
+            cursor.close();
+        }
+        db.close();
+        return userList;
+    }
+    @SuppressLint("Range")
     public List<Book> getAllBook() {
         List<Book> bookList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-//        String query = "SELECT b.*, c.* FROM " + TABLE_BOOK + " b, " + TABLE_CATETORIES +
-//                " c WHERE b." + COL_CATE_NAME + " = c." + COL_CATE_NAME;
+//        String query = "SELECT b.*, c.* FROM " + TABLE_BOOK +
+//                " b," + TABLE_CATETORIES +
+//                " c WHERE b." + COL_CATE_NAME + " = c." + COL_CATE_NAME ;
         String query = "SELECT * FROM " + TABLE_BOOK;
         Cursor cursor = db.rawQuery(query, null);
         if (cursor != null && cursor.moveToFirst()) {
