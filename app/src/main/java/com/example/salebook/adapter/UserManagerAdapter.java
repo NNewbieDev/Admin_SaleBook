@@ -4,14 +4,11 @@ import android.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,7 +23,8 @@ public class UserManagerAdapter extends RecyclerView.Adapter<UserManagerAdapter.
 
     private List<User> userList;
     private DatabaseAdapter db;
-    public void setData (List<User> list){
+
+    public void setData(List<User> list) {
         this.userList = list;
         notifyDataSetChanged();
     }
@@ -41,7 +39,7 @@ public class UserManagerAdapter extends RecyclerView.Adapter<UserManagerAdapter.
     @Override
     public void onBindViewHolder(@NonNull UserManagerVH holder, int position) {
         User user = userList.get(position);
-        if(userList == null){
+        if (userList == null) {
             return;
         }
         holder.labelUsername.setText(user.getUsername());
@@ -51,10 +49,35 @@ public class UserManagerAdapter extends RecyclerView.Adapter<UserManagerAdapter.
             View dialogView = LayoutInflater.from(holder.itemView.getContext()).inflate(R.layout.form_modify_account, null);
             builder.setView(dialogView);
 
+            AlertDialog dialog = builder.create();
+
             TextView btnDel = dialogView.findViewById(R.id.delAccountBtn);
             db = new DatabaseAdapter(holder.itemView.getContext());
             btnDel.setOnClickListener(btn -> {
-                db.deleteUserByUsername(user.getUsername());
+                AlertDialog.Builder alertBuilder = new AlertDialog.Builder(holder.itemView.getContext());
+
+                View viewAlert = LayoutInflater.from(holder.itemView.getContext()).inflate(R.layout.alert_delete, null);
+                alertBuilder.setView(viewAlert);
+
+                RelativeLayout closeBtn = viewAlert.findViewById(R.id.closeDialog);
+                LinearLayout acceptBtn = viewAlert.findViewById(R.id.acceptBtn);
+                TextView cancelBtn = viewAlert.findViewById(R.id.cancelBtn);
+
+                AlertDialog alert = alertBuilder.create();
+                closeBtn.setOnClickListener(close -> {
+                    alert.dismiss();
+                });
+                cancelBtn.setOnClickListener(cancel->{
+                    alert.dismiss();
+                });
+                acceptBtn.setOnClickListener(accept -> {
+                    db.deleteUserByUsername(user.getUsername());
+                    userList.remove(position);
+                    setData(userList);
+                    alert.dismiss();
+                    dialog.dismiss();
+                });
+                alert.show();
             });
 
             LinearLayout applyBtn = dialogView.findViewById(R.id.applyChangeBtn);
@@ -74,7 +97,6 @@ public class UserManagerAdapter extends RecyclerView.Adapter<UserManagerAdapter.
 //                }
             });
 
-            AlertDialog dialog = builder.create();
             dialog.show();
 
             RelativeLayout closeBtn = dialogView.findViewById(R.id.closeDialog);
@@ -86,7 +108,7 @@ public class UserManagerAdapter extends RecyclerView.Adapter<UserManagerAdapter.
 
     @Override
     public int getItemCount() {
-        if(userList != null){
+        if (userList != null) {
             return userList.size();
         }
         return 0;
@@ -96,6 +118,7 @@ public class UserManagerAdapter extends RecyclerView.Adapter<UserManagerAdapter.
         private TextView labelUsername;
         private TextView labelPassword;
         private LinearLayout viewAccount;
+
         public UserManagerVH(@NonNull View itemView) {
             super(itemView);
             labelUsername = itemView.findViewById(R.id.labelUsername);
