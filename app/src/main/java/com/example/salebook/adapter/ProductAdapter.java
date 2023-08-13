@@ -12,13 +12,26 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.salebook.R;
+import com.example.salebook.database.DatabaseAdapter;
 import com.example.salebook.model.Book;
+import com.example.salebook.model.User;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
-    private ArrayList<Book> listProduct;
+    private List<Book> listProduct;
+    private DatabaseAdapter db;
     private Context context;
+
+    public ProductAdapter() {
+    }
+    public void setData(List<Book> list){
+        this.listProduct= list;
+        notifyDataSetChanged();
+
+    }
+
 
     public ProductAdapter(ArrayList<Book> listProduct, Context context) {
         this.listProduct = listProduct;
@@ -36,8 +49,12 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.txttitle.setText(listProduct.get(position).getTitle());
-        holder.txtprice.setText(String.valueOf(listProduct.get(position).getPrice()));
+        Book book = listProduct.get(position);
+        if (listProduct == null) {
+            return;
+        }
+        holder.txttitle.setText(book.getTitle());
+        holder.txtprice.setText(String.valueOf(book.getPrice()));
 //        holder.imgproduct.setImageResource(listProduct.get(position).getImage());
         holder.btndetail.setOnClickListener(new View.OnClickListener() {
             @Override
