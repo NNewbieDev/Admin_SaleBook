@@ -74,12 +74,13 @@ public class FragAccountManager extends Fragment {
                 } else if (!confirm.equals(password)) {
                     Toast.makeText(layout.getContext(), "Mật khẩu không trùng khớp", Toast.LENGTH_SHORT).show();
                 } else {
-                    if(db.addUser(username, password)){
+                    if (db.addUser(username, password)) {
                         Toast.makeText(layout.getContext(), "Đã thêm", Toast.LENGTH_SHORT).show();
-                    }else {
+                        userList.add(new User(username, password));
+                        userManagerAdapter.setData(userList);
+                    } else {
                         Toast.makeText(layout.getContext(), "Thêm thất bại", Toast.LENGTH_SHORT).show();
                     }
-                    userList.add(new User(username, password));
 
                 }
             });

@@ -71,10 +71,12 @@ public class FragCategoryManager extends Fragment {
                 } else {
                     if (db.addCate(cateName)) {
                         Toast.makeText(layout.getContext(), "Đã thêm", Toast.LENGTH_SHORT).show();
+                        categoryList.add(new Category(cateName));
+                        categoryAdapter.setData(categoryList);
+
                     } else {
                         Toast.makeText(layout.getContext(), "Thêm thất bại", Toast.LENGTH_SHORT).show();
                     }
-                    categoryList.add(new Category(cateName));
                 }
             });
 

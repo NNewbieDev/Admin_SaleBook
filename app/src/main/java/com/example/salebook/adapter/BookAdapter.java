@@ -39,6 +39,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         holder.bookPub.setText(book.getPublisher());
         holder.bookDimens.setText(book.getDimension());
         holder.bookPrice.setText(String.valueOf(book.getPrice()).toString());
+        holder.bookCate.setText(book.getCategoriesId().getName());
     }
 
     @Override

@@ -93,10 +93,12 @@ public class FragProductManager extends Fragment {
                 } else {
                     if (db.addBook(title, author, pub, Integer.parseInt(price), 1000, image, Integer.parseInt(pages), dimens, category)) {
                         Toast.makeText(layout.getContext(), "Đã thêm", Toast.LENGTH_SHORT).show();
+                        bookList.add(new Book(title, author, pub, Integer.parseInt(price), 1000, image, Integer.parseInt(pages), dimens, category));
+                        bookAdapter.setData(bookList);
+
                     } else {
                         Toast.makeText(layout.getContext(), "Thêm thất bại", Toast.LENGTH_SHORT).show();
                     }
-                    bookList.add(new Book(title, author, pub, Integer.parseInt(price), 1000, image, Integer.parseInt(pages), dimens, category));
                 }
 
             });

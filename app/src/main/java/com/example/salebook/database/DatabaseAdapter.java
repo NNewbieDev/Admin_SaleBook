@@ -193,8 +193,9 @@ public class DatabaseAdapter extends SQLiteOpenHelper {
     public List<Book> getAllBook() {
         List<Book> bookList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-//        String query = "SELECT b.*, c.* FROM " + TABLE_BOOK + " b, " + TABLE_CATETORIES +
-//                " c WHERE b." + COL_CATE_NAME + " = c." + COL_CATE_NAME;
+//        String query = "SELECT b.*, c.* FROM " + TABLE_BOOK +
+//                " b," + TABLE_CATETORIES +
+//                " c WHERE b." + COL_CATE_NAME + " = c." + COL_CATE_NAME ;
         String query = "SELECT * FROM " + TABLE_BOOK;
         Cursor cursor = db.rawQuery(query, null);
         if (cursor != null && cursor.moveToFirst()) {
