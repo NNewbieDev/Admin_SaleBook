@@ -42,9 +42,6 @@ public class FragProductManager extends Fragment {
     private EditText edPub;
     private EditText edImg;
     private EditText edPrice;
-    private EditText edPage;
-    private EditText edDimens;
-    private EditText edCate;
 
     @Nullable
     @Override
@@ -90,27 +87,46 @@ public class FragProductManager extends Fragment {
                         String author = edAuthor.getText().toString().trim();
                         String pub = edPub.getText().toString().trim();
                         String image = edImg.getText().toString().trim();
-                        String dimens = edDimens.getText().toString().trim();
-                        String pages = edPage.getText().toString().trim();
                         String price = edPrice.getText().toString().trim();
 
-                        if (title.isEmpty() && author.isEmpty() && pub.isEmpty() && image.isEmpty() && edPrice.getText().toString().trim().isEmpty()) {
-                            Toast.makeText(layout.getContext(), "Điền thiếu thông tin", Toast.LENGTH_SHORT).show();
+                        Category category = categoryList.get(i);
+
+                        if (title.isEmpty() || author.isEmpty() || pub.isEmpty() || image.isEmpty() || price.isEmpty()) {
+                            Toast.makeText(dialogView.getContext(), "Điền thiếu thông tin", Toast.LENGTH_SHORT).show();
                         } else {
-                            if (db.addBook(title, author, pub, Integer.parseInt(price), 1000, image, Integer.parseInt(pages), dimens, categoryList.get(i))) {
-                                Toast.makeText(layout.getContext(), "Đã thêm", Toast.LENGTH_SHORT).show();
-                                bookList.add(new Book(title, author, pub, Integer.parseInt(price), 1000, image, Integer.parseInt(pages), dimens, categoryList.get(i)));
+                            if (db.addBook(title, author, pub, Integer.parseInt(price), 1000, image, category)) {
+                                Toast.makeText(dialogView.getContext(), "Đã thêm", Toast.LENGTH_SHORT).show();
+                                bookList.add(new Book(title, author, pub, Integer.parseInt(price), 1000, image, category));
                                 bookAdapter.setData(bookList);
                             } else {
-                                Toast.makeText(layout.getContext(), "Thêm thất bại", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(dialogView.getContext(), "Thêm thất bại", Toast.LENGTH_SHORT).show();
                             }
                         }
-
                     });
                 }
                 @Override
                 public void onNothingSelected(AdapterView<?> adapterView) {
+                    btnAdd.setOnClickListener(add -> {
+                        String title = edTitle.getText().toString().trim();
+                        String author = edAuthor.getText().toString().trim();
+                        String pub = edPub.getText().toString().trim();
+                        String image = edImg.getText().toString().trim();
+                        String price = edPrice.getText().toString().trim();
 
+                        Category category = categoryList.get(0);
+
+                        if (title.isEmpty() || author.isEmpty() || pub.isEmpty() || image.isEmpty() || price.isEmpty()) {
+                            Toast.makeText(dialogView.getContext(), "Điền thiếu thông tin", Toast.LENGTH_SHORT).show();
+                        } else {
+                            if (db.addBook(title, author, pub, Integer.parseInt(price), 1000, image, category)) {
+                                Toast.makeText(dialogView.getContext(), "Đã thêm", Toast.LENGTH_SHORT).show();
+                                bookList.add(new Book(title, author, pub, Integer.parseInt(price), 1000, image, category));
+                                bookAdapter.setData(bookList);
+                            } else {
+                                Toast.makeText(dialogView.getContext(), "Thêm thất bại", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
                 }
             });
 

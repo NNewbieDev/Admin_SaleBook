@@ -236,10 +236,10 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
                         if (newTitle.isEmpty() || newAuthor.isEmpty() || newPub.isEmpty() || newPrice.isEmpty()) {
                             Toast.makeText(viewAlert.getContext(), "Điền thiếu thông tin", Toast.LENGTH_SHORT).show();
                         } else {
-                            Category selectedCategory = categoryList.get(i); // Get the selected category from the list
+                            Category selectedCategory = categoryList.get(i);
 
                             if (db.updateBookInfo(book.getTitle(), newTitle, newAuthor, newPub, newImage, newDimens, Integer.parseInt(newPrice), Integer.parseInt(newPages), newDesc, Integer.parseInt(newQuantity), selectedCategory)) {
-                                Toast.makeText(viewAlert.getContext(), "Đã thêm", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(viewAlert.getContext(), "Đã cập nhật", Toast.LENGTH_SHORT).show();
                                 book.setTitle(newTitle);
                                 book.setAuthor(newAuthor);
                                 book.setPublisher(newPub);
@@ -247,7 +247,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
                                 notifyDataSetChanged();
                                 alert.dismiss();
                             } else {
-                                Toast.makeText(viewAlert.getContext(), "Thêm thất bại", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(viewAlert.getContext(), "Cập nhật thất bại", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
@@ -272,7 +272,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
                             Category selectedCategory = categoryList.get(0); // Get the selected category from the list
 
                             if (db.updateBookInfo(book.getTitle(), newTitle, newAuthor, newPub, newImage, newDimens, Integer.parseInt(newPrice), Integer.parseInt(newPages), newDesc, Integer.parseInt(newQuantity), selectedCategory)) {
-                                Toast.makeText(viewAlert.getContext(), "Đã thêm", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(viewAlert.getContext(), "Đã cập nhật", Toast.LENGTH_SHORT).show();
                                 book.setTitle(newTitle);
                                 book.setAuthor(newAuthor);
                                 book.setPublisher(newPub);
@@ -280,7 +280,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
                                 notifyDataSetChanged();
                                 alert.dismiss();
                             } else {
-                                Toast.makeText(viewAlert.getContext(), "Thêm thất bại", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(viewAlert.getContext(), "Cập nhật thất bại", Toast.LENGTH_SHORT).show();
                             }
                         }
                     });

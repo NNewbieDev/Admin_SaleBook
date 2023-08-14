@@ -20,7 +20,7 @@ public class Book {
         this.price=price;
     }
 
-    public Book( String title, String author, String publisher, int price, int quantity, String image, int pages, String dimension, Category category) {
+    public Book( String title, String author, String publisher, int price, int quantity, String image, Category category) {
         this.title = title;
         this.author = author;
         this.publisher = publisher;

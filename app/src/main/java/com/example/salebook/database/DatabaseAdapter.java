@@ -422,8 +422,7 @@ public class DatabaseAdapter extends SQLiteOpenHelper {
     }
     public boolean addBook(String title, String author, String publisher,
                            int price, int quantity,
-                           String img, int pages, String dimension,
-                           Category category) {
+                           String img, Category category) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
@@ -433,8 +432,6 @@ public class DatabaseAdapter extends SQLiteOpenHelper {
         values.put(COL_BOOK_PRICE, price);
         values.put(COL_BOOK_QUANTITY, quantity);
         values.put(COL_BOOK_IMG, img);
-        values.put(COL_BOOK_PAGE, pages);
-        values.put(COL_BOOK_DIMENS, dimension);
         values.put(COL_CATE_ID, category.getId());
 
         long newRow = db.insert(TABLE_BOOK, null, values);
