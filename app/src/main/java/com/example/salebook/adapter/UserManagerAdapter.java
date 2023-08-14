@@ -1,22 +1,28 @@
 package com.example.salebook.adapter;
 
 import android.app.AlertDialog;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.salebook.R;
 import com.example.salebook.database.DatabaseAdapter;
+import com.example.salebook.model.Role;
 import com.example.salebook.model.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserManagerAdapter extends RecyclerView.Adapter<UserManagerAdapter.UserManagerVH> {
@@ -53,6 +59,7 @@ public class UserManagerAdapter extends RecyclerView.Adapter<UserManagerAdapter.
 
             TextView btnDel = dialogView.findViewById(R.id.delAccountBtn);
             db = new DatabaseAdapter(holder.itemView.getContext());
+//            DELETE
             btnDel.setOnClickListener(btn -> {
                 AlertDialog.Builder alertBuilder = new AlertDialog.Builder(holder.itemView.getContext());
 
@@ -67,7 +74,7 @@ public class UserManagerAdapter extends RecyclerView.Adapter<UserManagerAdapter.
                 closeBtn.setOnClickListener(close -> {
                     alert.dismiss();
                 });
-                cancelBtn.setOnClickListener(cancel->{
+                cancelBtn.setOnClickListener(cancel -> {
                     alert.dismiss();
                 });
                 acceptBtn.setOnClickListener(accept -> {
@@ -81,20 +88,49 @@ public class UserManagerAdapter extends RecyclerView.Adapter<UserManagerAdapter.
             });
 
             LinearLayout applyBtn = dialogView.findViewById(R.id.applyChangeBtn);
-            String arrayRole[] = {"Admin", "User"};
-//            ArrayAdapter<String> roleAdapter = ArrayAdapter.createFromResource(dialogView.getContext(), ,);
-            Spinner spinRole = dialogView.findViewById(R.id.spinRole);
+
+//            UPDATE
             EditText ipUsername = dialogView.findViewById(R.id.inputUsername);
             ipUsername.setText(user.getUsername());
+            EditText ipPassword = dialogView.findViewById(R.id.inputPassword);
 
-            applyBtn.setOnClickListener(btn -> {
-                String username = ipUsername.getText().toString().trim();
+            Spinner spinRole = dialogView.findViewById(R.id.spinRole);
+            List<Role> arrayRole = db.getAllRole();
+            ArrayAdapter roleAdapter = new ArrayAdapter(holder.itemView.getContext(), android.R.layout.simple_spinner_item, arrayRole);
+            roleAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinRole.setAdapter(roleAdapter);
 
-//                if( db.updateUserInfo(username,)){
-//                    Toast.makeText(holder.itemView.getContext(), "Cập nhật thành công", Toast.LENGTH_SHORT).show();
-//                }else {
-//                    Toast.makeText(holder.itemView.getContext(), "Cập nhật thất bại", Toast.LENGTH_SHORT).show();
-//                }
+            spinRole.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    applyBtn.setOnClickListener(btn -> {
+                        String username = ipUsername.getText().toString().trim();
+                        String password = ipPassword.getText().toString().trim();
+                        if( db.updateUserInfo(user.getUsername(),username, password, arrayRole.get(i).getRoleId() )){
+                            Toast.makeText(holder.itemView.getContext(), "Cập nhật thành công", Toast.LENGTH_SHORT).show();
+                            user.setUsername(username);
+                            notifyDataSetChanged();
+                            dialog.dismiss();
+                        }else {
+                            Toast.makeText(holder.itemView.getContext(), "Cập nhật thất bại", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+                    applyBtn.setOnClickListener(btn -> {
+                        String username = ipUsername.getText().toString().trim();
+                        String password = ipPassword.getText().toString().trim();
+                        if( db.updateUserInfo(user.getUsername(),username, password, arrayRole.get(0).getRoleId() )){
+                            Toast.makeText(holder.itemView.getContext(), "Cập nhật thành công", Toast.LENGTH_SHORT).show();
+                            user.setUsername(username);
+                            notifyDataSetChanged();
+                            dialog.dismiss();
+                        }else {
+                            Toast.makeText(holder.itemView.getContext(), "Cập nhật thất bại", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
             });
 
             dialog.show();

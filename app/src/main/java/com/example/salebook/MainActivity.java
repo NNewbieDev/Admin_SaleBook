@@ -56,8 +56,6 @@ public class MainActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 String userName = etUsername.getText().toString();
                 String pass = etPassword.getText().toString();
                 if (checkLogin(userName, pass) == 1) {
@@ -69,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(getApplicationContext(), "Tên tài khoản hoặc mật khẩu không đúng", Toast.LENGTH_SHORT).show();
                 }
-
             }
         });
 

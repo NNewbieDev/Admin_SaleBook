@@ -11,6 +11,15 @@ public class Category {
         this.name = name;
     }
 
+    public String getDisplayText() {
+        return id + " - " + name;
+    }
+
+    @Override
+    public String toString() {
+        return getDisplayText();
+    }
+
     public int getId() {
         return id;
     }

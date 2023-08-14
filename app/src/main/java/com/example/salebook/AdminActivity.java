@@ -9,10 +9,10 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.ContextMenu;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -22,8 +22,6 @@ import com.example.salebook.fragment.FragBestSeller;
 import com.example.salebook.fragment.FragCategoryManager;
 import com.example.salebook.fragment.FragHome;
 import com.example.salebook.fragment.FragProductManager;
-import com.example.salebook.fragment.FragSignIn;
-import com.example.salebook.fragment.FragSignUp;
 import com.google.android.material.navigation.NavigationView;
 
 public class AdminActivity extends AppCompatActivity {
@@ -33,8 +31,7 @@ public class AdminActivity extends AppCompatActivity {
     private static final int FCATEGORYMANAGER = 2;
     private static final int FPRODUCTMANAGER = 3;
     private static final int FBESTSELLER = 4;
-    private static final int FSIGNIN = 5;
-    private static final int FSIGNUP = 6;
+
     private static int CurrenFrag = 0;
     private ConstraintLayout homeItem;
     private ConstraintLayout statisticItem;
@@ -92,6 +89,7 @@ public class AdminActivity extends AppCompatActivity {
         toggle.syncState();
         replaceFrag(new FragHome());
     }
+
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
@@ -134,31 +132,10 @@ public class AdminActivity extends AppCompatActivity {
                 mainLayout.closeDrawer(GravityCompat.START);
                 return false;
             }
-        } else if (id == R.id.bestSeller) {
-            if (CurrenFrag != FBESTSELLER) {
-                replaceFrag(new FragBestSeller());
-                CurrenFrag = FBESTSELLER;
-                return true;
-            } else {
-                mainLayout.closeDrawer(GravityCompat.START);
-                return false;
-            }
-        } else if (id == R.id.userSignIn) {
-            if (CurrenFrag != FSIGNIN) {
-                replaceFrag(new FragSignIn());
-                CurrenFrag = FSIGNIN;
-                return true;
-            } else {
-                return false;
-            }
-        } else if (id == R.id.userSignUp) {
-            if (CurrenFrag != FSIGNIN) {
-                replaceFrag(new FragSignUp());
-                CurrenFrag = FSIGNUP;
-                return true;
-            } else {
-                return false;
-            }
+        } else if (id == R.id.userLogout) {
+            Intent intent = new Intent(AdminActivity.this, MainActivity.class);
+            startActivity(intent);
+            return true;
         } else {
             return super.onContextItemSelected(item);
         }

@@ -103,7 +103,40 @@
                     android:paddingHorizontal="20dp"
                     android:paddingVertical="10dp" />
             </LinearLayout>
-
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:orientation="horizontal">
+                <EditText
+                    android:id="@+id/inputDesc"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/rounded_horizontal"
+                    android:drawableStart="@drawable/book_solid_24"
+                    android:drawablePadding="10dp"
+                    android:drawableTint="@color/blueAdmin"
+                    android:hint="Mô tả sách"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="10dp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:orientation="horizontal">
+                <EditText
+                    android:id="@+id/inputQuantity"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/rounded_horizontal"
+                    android:drawableStart="@drawable/book_solid_24"
+                    android:drawablePadding="10dp"
+                    android:drawableTint="@color/blueAdmin"
+                    android:hint="Số lượng sách sách"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="10dp" />
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -145,6 +178,42 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="15dp"
                 android:orientation="horizontal">
+                <EditText
+                    android:id="@+id/inputPage"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/rounded_horizontal"
+                    android:drawableStart="@drawable/file_lines_solid_24"
+                    android:drawablePadding="10dp"
+                    android:drawableTint="@color/blueAdmin"
+                    android:hint="Số trang sách"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="10dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:orientation="horizontal">
+                <EditText
+                    android:id="@+id/inputDimension"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/rounded_horizontal"
+                    android:drawableStart="@drawable/book_solid_24"
+                    android:drawablePadding="10dp"
+                    android:drawableTint="@color/blueAdmin"
+                    android:hint="Kích thước"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="10dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:orientation="horizontal">
                 <Spinner
                     android:id="@+id/spinRole"
                     android:layout_width="match_parent"
@@ -162,7 +231,7 @@
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:id="@+id/addBookBtn"
+                    android:id="@+id/applyChangeBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -175,14 +244,29 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
+                        android:layout_gravity="center_horizontal"
+                        android:drawableEnd="@drawable/check_solid_35"
                         android:drawablePadding="8dp"
                         android:drawableTint="@color/blueAdmin"
-                        android:text="Thêm"
+                        android:text="Áp dụng"
                         android:textColor="@color/blueAdmin"
                         android:textSize="25sp"
                         android:textStyle="bold" />
                 </LinearLayout>
+
+                <TextView
+                    android:id="@+id/cancelBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:drawableEnd="@drawable/trash_solid"
+                    android:drawablePadding="10dp"
+                    android:drawableTint="@color/white"
+                    android:text="Hủy bỏ"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
         </LinearLayout>

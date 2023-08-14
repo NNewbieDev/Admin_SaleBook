@@ -5,10 +5,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -49,8 +52,8 @@ public class FragProductManager extends Fragment {
         View layout = inflater.inflate(R.layout.f_product_manager, container, false);
 
         btnAddBook = layout.findViewById(R.id.btnAddBook);
-        recyclerView = layout.findViewById(R.id.listProductManager);
 
+        recyclerView = layout.findViewById(R.id.listProductManager);
         bookAdapter = new BookAdapter();
         db = new DatabaseAdapter(layout.getContext());
 
@@ -72,36 +75,46 @@ public class FragProductManager extends Fragment {
             edPub = dialogView.findViewById(R.id.inputPub);
             edImg = dialogView.findViewById(R.id.inputImage);
             edPrice = dialogView.findViewById(R.id.inputPrice);
-            edPage = dialogView.findViewById(R.id.inputPage);
-            edDimens = dialogView.findViewById(R.id.inputDimension);
-            edCate = dialogView.findViewById(R.id.inputCate);
 
-            btnAdd.setOnClickListener(add -> {
-                String title = edTitle.getText().toString().trim();
-                String author = edAuthor.getText().toString().trim();
-                String pub = edPub.getText().toString().trim();
-                String image = edImg.getText().toString().trim();
-                String dimens = edDimens.getText().toString().trim();
+            Spinner spinner = dialogView.findViewById(R.id.spinRole);
+            List<Category> categoryList = db.getAllCate();
+            ArrayAdapter adapter = new ArrayAdapter(dialogView.getContext(), android.R.layout.simple_spinner_item, categoryList);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinner.setAdapter(adapter);
 
-                Category category = new Category();
-                category.setName(edCate.getText().toString().trim());
-                String pages = edPage.getText().toString().trim();
-                String price = edPrice.getText().toString().trim();
+            spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    btnAdd.setOnClickListener(add -> {
+                        String title = edTitle.getText().toString().trim();
+                        String author = edAuthor.getText().toString().trim();
+                        String pub = edPub.getText().toString().trim();
+                        String image = edImg.getText().toString().trim();
+                        String dimens = edDimens.getText().toString().trim();
+                        String pages = edPage.getText().toString().trim();
+                        String price = edPrice.getText().toString().trim();
 
-                if (title.isEmpty() && author.isEmpty() && pub.isEmpty() && image.isEmpty() && edPrice.getText().toString().trim().isEmpty()) {
-                    Toast.makeText(layout.getContext(), "Điền thiếu thông tin", Toast.LENGTH_SHORT).show();
-                } else {
-                    if (db.addBook(title, author, pub, Integer.parseInt(price), 1000, image, Integer.parseInt(pages), dimens, category)) {
-                        Toast.makeText(layout.getContext(), "Đã thêm", Toast.LENGTH_SHORT).show();
-                        bookList.add(new Book(title, author, pub, Integer.parseInt(price), 1000, image, Integer.parseInt(pages), dimens, category));
-                        bookAdapter.setData(bookList);
+                        if (title.isEmpty() && author.isEmpty() && pub.isEmpty() && image.isEmpty() && edPrice.getText().toString().trim().isEmpty()) {
+                            Toast.makeText(layout.getContext(), "Điền thiếu thông tin", Toast.LENGTH_SHORT).show();
+                        } else {
+                            if (db.addBook(title, author, pub, Integer.parseInt(price), 1000, image, Integer.parseInt(pages), dimens, categoryList.get(i))) {
+                                Toast.makeText(layout.getContext(), "Đã thêm", Toast.LENGTH_SHORT).show();
+                                bookList.add(new Book(title, author, pub, Integer.parseInt(price), 1000, image, Integer.parseInt(pages), dimens, categoryList.get(i)));
+                                bookAdapter.setData(bookList);
+                            } else {
+                                Toast.makeText(layout.getContext(), "Thêm thất bại", Toast.LENGTH_SHORT).show();
+                            }
+                        }
 
-                    } else {
-                        Toast.makeText(layout.getContext(), "Thêm thất bại", Toast.LENGTH_SHORT).show();
-                    }
+                    });
                 }
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
 
+                }
             });
+
+
 
             AlertDialog dialog = builder.create();
             closeBtn = dialogView.findViewById(R.id.closeDialog);

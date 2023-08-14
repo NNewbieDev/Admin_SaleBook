@@ -2,13 +2,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     >
     <item
-        android:id="@+id/userSignIn"
+        android:id="@+id/userLogout"
         android:icon="@drawable/user_solid"
         android:iconTint="@color/blueAdmin"
-        android:title="@string/sign_in"></item>
-    <item
-        android:id="@+id/userSignUp"
-        android:iconTint="@color/blueAdmin"
-        android:icon="@drawable/user_solid"
-        android:title="@string/sign_up"></item>
+        android:title="Đăng xuất"></item>
 </menu>

@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.salebook.model.Book;
@@ -43,7 +44,7 @@ public class DatabaseAdapter extends SQLiteOpenHelper {
     private static final String COL_ITEM_QUANTITY = "itemQuantity";
     private static final String COL_ITEM_DEBT = "itemDebt";
     //    TABLE CATEGORY
-    private static final String TABLE_CATETORIES = "Categories";
+    private static final String TABLE_CATEGORIES = "Categories";
     private static final String COL_CATE_ID = "categoriesId";
     private static final String COL_CATE_NAME = "categoriesName";
     //    TABLE BOOK
@@ -88,7 +89,7 @@ public class DatabaseAdapter extends SQLiteOpenHelper {
                     " TEXT, " + COL_ORDER_TOTAL +
                     " INTEGER, " + COL_USER_ID +
                     " INTEGER, FOREIGN KEY (" + COL_USER_ID + ") REFERENCES " + TABLE_USER + "(" + COL_USER_ID + "))";
-            String queryCategories = "CREATE TABLE " + TABLE_CATETORIES +
+            String queryCategories = "CREATE TABLE " + TABLE_CATEGORIES +
                     "(" + COL_CATE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COL_CATE_NAME +
                     " TEXT)";
             String queryOrderItem = "CREATE TABLE " + TABLE_ORDER_ITEMS + "( " + COL_ITEM_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -103,7 +104,7 @@ public class DatabaseAdapter extends SQLiteOpenHelper {
                     " TEXT NOT NULL, " + COL_BOOK_AUTHOR +
                     " TEXT NOT NULL, " + COL_BOOK_PUB +
                     " TEXT NOT NULL, " + COL_BOOK_PRICE +
-                    " INTEGER NOT NULL, " + COL_BOOK_QUANTITY +
+                    " INTEGER NOT NULL DEFAULT 100, " + COL_BOOK_QUANTITY +
                     " NUMERIC, " + COL_BOOK_IMG +
                     " TEXT, " + COL_BOOK_DESC +
                     " TEXT, " + COL_BOOK_RATE +
@@ -111,7 +112,7 @@ public class DatabaseAdapter extends SQLiteOpenHelper {
                     " INTEGER, " + COL_BOOK_DIMENS +
                     " TEXT, " + COL_CATE_ID +
                     " INTEGER, " +
-                    "FOREIGN KEY(" + COL_CATE_ID + ") REFERENCES " + TABLE_CATETORIES + "(" + COL_CATE_ID + "))";
+                    "FOREIGN KEY(" + COL_CATE_ID + ") REFERENCES " + TABLE_CATEGORIES + "(" + COL_CATE_ID + "))";
             db.execSQL(queryOrderItem);
             db.execSQL(queryBook);
             db.execSQL(queryCategories);
@@ -124,11 +125,9 @@ public class DatabaseAdapter extends SQLiteOpenHelper {
             Log.e("Error", "Table exists ");
         }
     }
-
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
     }
-
     public void defaultRole(SQLiteDatabase db) {
         ContentValues values = new ContentValues();
         values.put(COL_ROLE_NAME, "User");
@@ -138,7 +137,6 @@ public class DatabaseAdapter extends SQLiteOpenHelper {
         values.put(COL_ROLE_NAME, "Admin");
         db.insert(TABLE_ROLE, null, values);
     }
-
     public void accountAdmin(SQLiteDatabase db) {
         ContentValues values = new ContentValues();
         values.put(COL_USERNAME, "admin");
@@ -168,7 +166,6 @@ public class DatabaseAdapter extends SQLiteOpenHelper {
         db.close();
         return userList;
     }
-
     @SuppressLint("Range")
     public List<User> getAllData() {
         List<User> userList = new ArrayList<>();
@@ -223,11 +220,12 @@ public class DatabaseAdapter extends SQLiteOpenHelper {
     public List<Book> getAllBook() {
         List<Book> bookList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-//        String query = "SELECT b.*, c.* FROM " + TABLE_BOOK +
-//                " b," + TABLE_CATETORIES +
-//                " c WHERE b." + COL_CATE_NAME + " = c." + COL_CATE_NAME ;
-        String query = "SELECT * FROM " + TABLE_BOOK;
+
+        String query = "SELECT b.*, c.* FROM " + TABLE_BOOK +
+                " b INNER JOIN " + TABLE_CATEGORIES + " c ON b." + COL_CATE_ID + " = c." + COL_CATE_ID;
+
         Cursor cursor = db.rawQuery(query, null);
+
         if (cursor != null && cursor.moveToFirst()) {
             do {
                 Book book = new Book();
@@ -246,22 +244,44 @@ public class DatabaseAdapter extends SQLiteOpenHelper {
                 category.setName(cursor.getString(cursor.getColumnIndex(COL_CATE_NAME)));
 
                 book.setCategoriesId(category);
+
                 bookList.add(book);
             } while (cursor.moveToNext());
+
+            cursor.close();
+        }
+
+        db.close();
+        return bookList;
+    }
+    @SuppressLint("Range")
+    public List<Role> getAllRole(){
+        List<Role> roleList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE_ROLE;
+        Cursor cursor = db.rawQuery(query, null);
+        if(cursor !=null && cursor.moveToFirst()){
+            do {
+                Role role = new Role();
+                role.setRoleId(cursor.getInt(cursor.getColumnIndex(COL_ROLE_ID)));
+                role.setRoleName(cursor.getString(cursor.getColumnIndex(COL_ROLE_NAME)));
+                roleList.add(role);
+            }while(cursor.moveToNext());
             cursor.close();
         }
         db.close();
-        return bookList;
+        return roleList;
     }
     @SuppressLint("Range")
     public List<Category> getAllCate(){
         List<Category> categoryList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-        String query =  "SELECT * FROM " + TABLE_CATETORIES;
+        String query =  "SELECT * FROM " + TABLE_CATEGORIES;
         Cursor cursor = db.rawQuery(query, null);
         if(cursor != null && cursor.moveToFirst()){
             do {
                 Category category = new Category();
+                category.setId(cursor.getInt(cursor.getColumnIndex(COL_CATE_ID)));
                 category.setName(cursor.getString(cursor.getColumnIndex(COL_CATE_NAME)));
                 categoryList.add(category);
             }while(cursor.moveToNext());
@@ -318,7 +338,6 @@ public class DatabaseAdapter extends SQLiteOpenHelper {
 
         db.close();
     }
-
     public void deleteBookByName(String name) {
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -331,7 +350,6 @@ public class DatabaseAdapter extends SQLiteOpenHelper {
 
         db.close();
     }
-
     public void deleteCateByName(String name) {
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -340,7 +358,7 @@ public class DatabaseAdapter extends SQLiteOpenHelper {
         String[] selectionArgs = {name};
 
         // Perform the delete operation
-        db.delete(TABLE_CATETORIES, selection, selectionArgs);
+        db.delete(TABLE_CATEGORIES, selection, selectionArgs);
 
         db.close();
     }
@@ -357,7 +375,6 @@ public class DatabaseAdapter extends SQLiteOpenHelper {
         db.close();
         return newRow == -1 ? false : true;
     }
-
     public void themUser(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -371,20 +388,20 @@ public class DatabaseAdapter extends SQLiteOpenHelper {
         long newRowId = db.insert(TABLE_USER, null, values);
         db.close();
     }
-
     public boolean addCate(String nameCate) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
         values.put(COL_CATE_NAME, nameCate);
 
-        long newRow = db.insert(TABLE_CATETORIES, null, values);
+        long newRow = db.insert(TABLE_CATEGORIES, null, values);
         db.close();
         return newRow == -1 ? false : true;
     }
-
-    public boolean addBook(String title, String author, String publisher, int price, int quantity,
-                           String img, int pages, String dimension, Category category) {
+    public boolean addBook(String title, String author, String publisher,
+                           int price, int quantity,
+                           String img, int pages, String dimension,
+                           Category category) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
@@ -404,14 +421,18 @@ public class DatabaseAdapter extends SQLiteOpenHelper {
     }
 
     //    UPDATE METHODS
-    public boolean updateUserInfo(String username, int newRole) {
+    public boolean updateUserInfo(String checkUser, String newUser, String password , int newRole) {
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
         // Define the WHERE clause
         String selection = COL_USERNAME + " = ?";
-        String[] selectionArgs = {username};
+        String[] selectionArgs = {checkUser};
+
+        values.put(COL_USERNAME, newUser);
+        values.put(COL_PASSWORD, password);
+        values.put(COL_ROLE_ID, newRole);
 
         // Perform the update operation
         long state = db.update(TABLE_USER, values, selection, selectionArgs);
@@ -422,17 +443,49 @@ public class DatabaseAdapter extends SQLiteOpenHelper {
             return true;
         }
     }
+    public boolean updateBookInfo(String checkTitle, String title, String author,
+                                  String pub, String img, String dimens,
+                                  int price, int page, String desc, int quantity,
+                                  Category category ){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
 
-    public boolean updateBookInfo(String name) {
+        values.put(COL_BOOK_TITLE, title);
+        values.put(COL_BOOK_AUTHOR, author);
+        values.put(COL_BOOK_PRICE, price);
+        values.put(COL_BOOK_PUB, pub);
+        values.put(COL_BOOK_DESC, desc);
+        values.put(COL_BOOK_DIMENS, dimens);
+        values.put(COL_BOOK_IMG, img);
+        values.put(COL_BOOK_PAGE, page);
+        values.put(COL_BOOK_QUANTITY, quantity);
+        values.put(COL_CATE_ID, category.getId());
+
+        // Define the WHERE clause
+        String selection = COL_BOOK_TITLE + " = ?";
+        String[] selectionArgs = {checkTitle};
+
+        // Perform the update operation
+        long state = db.update(TABLE_BOOK, values, selection, selectionArgs);
+        db.close();
+        if (state == -1) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    public boolean updateCateInfo(String name, String newName) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
         // Define the WHERE clause
-        String selection = COL_BOOK_TITLE + " = ?";
+        String selection = COL_CATE_NAME + " = ?";
         String[] selectionArgs = {name};
 
+        values.put(COL_CATE_NAME, newName);
+
         // Perform the update operation
-        long state = db.update(TABLE_BOOK, values, selection, selectionArgs);
+        long state = db.update(TABLE_CATEGORIES, values, selection, selectionArgs);
         db.close();
         if (state == -1) {
             return false;

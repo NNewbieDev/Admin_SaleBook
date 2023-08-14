@@ -68,6 +68,24 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
             android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/inputPassword"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/rounded_horizontal"
+                android:drawableStart="@drawable/lock_solid_24"
+                android:drawablePadding="10dp"
+                android:drawableTint="@color/blueAdmin"
+                android:hint="Mật khẩu"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="10dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:orientation="horizontal">
             <Spinner
                 android:id="@+id/spinRole"
                 android:layout_width="match_parent"

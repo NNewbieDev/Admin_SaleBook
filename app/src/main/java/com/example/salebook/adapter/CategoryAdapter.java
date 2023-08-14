@@ -4,9 +4,11 @@ import android.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -41,11 +43,40 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         }
         DatabaseAdapter db = new DatabaseAdapter(holder.itemView.getContext());
         holder.categoryName.setText(category.getName());
-
+//        UPDATE
         holder.modifyBtn.setOnClickListener(btn->{
+            AlertDialog.Builder alertBuilder = new AlertDialog.Builder(holder.itemView.getContext());
 
+            View viewAlert = LayoutInflater.from(holder.itemView.getContext()).inflate(R.layout.form_modify_category, null);
+            alertBuilder.setView(viewAlert);
+
+            RelativeLayout closeBtn = viewAlert.findViewById(R.id.closeDialog);
+            LinearLayout acceptBtn = viewAlert.findViewById(R.id.acceptBtn);
+            TextView cancelBtn = viewAlert.findViewById(R.id.cancelBtn);
+            EditText ipCateName = viewAlert.findViewById(R.id.inputCateName);
+
+            AlertDialog alert = alertBuilder.create();
+            closeBtn.setOnClickListener(close -> {
+                alert.dismiss();
+            });
+            cancelBtn.setOnClickListener(cancel->{
+                alert.dismiss();
+            });
+            acceptBtn.setOnClickListener(accept -> {
+                String name = ipCateName.getText().toString().trim();
+                if(db.updateCateInfo(category.getName(), name)){
+                    Toast.makeText(holder.itemView.getContext(), "Cập nhật thành công", Toast.LENGTH_SHORT).show();
+                    category.setName(name);
+                    notifyDataSetChanged();
+                    alert.dismiss();
+                }else {
+                    Toast.makeText(holder.itemView.getContext(), "Cập nhật thất bại", Toast.LENGTH_SHORT).show();
+                }
+
+            });
+            alert.show();
         });
-
+//        DELETE
         holder.delBtn.setOnClickListener(btn->{
             AlertDialog.Builder alertBuilder = new AlertDialog.Builder(holder.itemView.getContext());
 
