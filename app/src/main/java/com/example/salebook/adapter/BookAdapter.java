@@ -244,6 +244,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
                                 book.setAuthor(newAuthor);
                                 book.setPublisher(newPub);
                                 book.setPrice(Integer.parseInt(newPrice));
+                                book.setCategoriesId(selectedCategory);
                                 notifyDataSetChanged();
                                 alert.dismiss();
                             } else {
