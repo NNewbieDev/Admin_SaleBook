@@ -15,6 +15,10 @@ public class Book {
 
     public Book() {
     }
+    public Book(String title,int price){
+        this.title=title;
+        this.price=price;
+    }
 
     public Book( String title, String author, String publisher, int price, int quantity, String image, int pages, String dimension, Category category) {
         this.title = title;

@@ -186,6 +186,28 @@ public class DatabaseAdapter extends SQLiteOpenHelper {
         db.close();
         return userList;
     }
+
+
+    @SuppressLint("Range")
+    public List<Book> getDataBook() {
+        List<Book> booklist = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE_BOOK;
+        Cursor cursor = db.rawQuery(query, null);
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                // Retrieve data from the cursor and create YourDataModel objects
+                Book data = new Book();
+                data.setTitle(cursor.getString(cursor.getColumnIndex(COL_BOOK_TITLE)));
+                data.setPrice(cursor.getInt(cursor.getColumnIndex(COL_BOOK_PRICE)));
+                // Set other properties of the data model
+                booklist.add(data);
+            } while (cursor.moveToNext());
+            cursor.close();
+        }
+        db.close();
+        return booklist;
+    }
     @SuppressLint("Range")
     public List<User> getUser() {
         List<User> userList = new ArrayList<>();
