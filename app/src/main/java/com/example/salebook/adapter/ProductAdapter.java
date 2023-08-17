@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -23,6 +24,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     private List<Book> listProduct;
     private DatabaseAdapter db;
     private Context context;
+
 
     public ProductAdapter() {
     }
@@ -75,7 +77,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
         public TextView txttitle, txtprice;
         public Button btndetail;
-//        public ImageView imgproduct;
+        //        public ImageView imgproduct;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txttitle=itemView.findViewById(R.id.txt_title);
