@@ -83,6 +83,7 @@
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/customNav"
         android:layout_width="70dp"
+        android:layout_marginTop="70dp"
         android:layout_height="match_parent"
         android:layout_gravity="start">
 

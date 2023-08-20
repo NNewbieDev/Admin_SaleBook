@@ -2,6 +2,7 @@ package com.example.salebook;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -38,6 +39,13 @@ public class InfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info);
         Anhxa();
+        //xử lý sự kiện khi nhấn thanh 3 gạch
+
+        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+        ImageView imvNavigation = findViewById(R.id.imv_navigation);
+
+        XuLyThanhTruot xuLyThanhTruot = new XuLyThanhTruot(drawerLayout, imvNavigation);
+        xuLyThanhTruot.xuLy();
         databaseAdapter = new DatabaseAdapter(this);
         User user = (User) getIntent().getExtras().get("object_user");
 

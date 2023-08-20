@@ -1,10 +1,12 @@
 package com.example.salebook;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.widget.ImageView;
 
 import com.example.salebook.adapter.OrderItemAdapter;
 import com.example.salebook.database.DatabaseAdapter;
@@ -22,6 +24,13 @@ public class CartActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
+        //xử lý sự kiện khi nhấn thanh 3 gạch
+
+        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+        ImageView imvNavigation = findViewById(R.id.imv_navigation);
+
+        XuLyThanhTruot xuLyThanhTruot = new XuLyThanhTruot(drawerLayout, imvNavigation);
+        xuLyThanhTruot.xuLy();
 
         recyclerViewCar = findViewById(R.id.rec_car);
 

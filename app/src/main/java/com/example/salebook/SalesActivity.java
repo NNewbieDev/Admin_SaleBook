@@ -2,6 +2,7 @@ package com.example.salebook;
 
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.SearchView;
@@ -34,6 +35,14 @@ public class SalesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sales);
+
+        //xử lý sự kiện khi nhấn thanh 3 gạch
+
+        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+        ImageView imvNavigation = findViewById(R.id.imv_navigation);
+
+        XuLyThanhTruot xuLyThanhTruot = new XuLyThanhTruot(drawerLayout, imvNavigation);
+        xuLyThanhTruot.xuLy();
 
         //xử lý sự kiện khi nhấn vào biểu tượng shop trên toolbar
         ImageView ivShop = findViewById(R.id.iv_shop);

@@ -1,8 +1,14 @@
 package com.example.salebook;
 
 
-import androidx.appcompat.app.AppCompatActivity;
+import static com.example.salebook.R.id.iv_shop;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -42,9 +48,20 @@ public class MainActivity extends AppCompatActivity {
         Anhxa();
         databaseAdapter = new DatabaseAdapter(this);
         //xử lý sự kiện khi nhấn vào biểu tượng shop trên toolbar
-        ImageView ivShop = findViewById(R.id.iv_shop);
+        ImageView ivShop = findViewById(iv_shop);
         OnClickHelper onClickHelper = new OnClickHelper(this);
         ivShop.setOnClickListener(onClickHelper);
+
+        //xử lý sự kiện khi nhấn thanh 3 gạch
+
+        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+        ImageView imvNavigation = findViewById(R.id.imv_navigation);
+
+        XuLyThanhTruot xuLyThanhTruot = new XuLyThanhTruot(drawerLayout, imvNavigation);
+        xuLyThanhTruot.xuLy();
+
+
+
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,12 +146,12 @@ public class MainActivity extends AppCompatActivity {
         etPassword = (EditText) findViewById(R.id.editTextTextPassword);
         btnLogin = (Button) findViewById(R.id.btn_login);
 
-        databaseAdapter = new DatabaseAdapter(this);
-        List<OrderItem> orderItemsList = databaseAdapter.getOrderItem();
-        for (OrderItem o : orderItemsList) {
-            Log.d("Tag", "Giá trị bảng OrderItems: " + o.getBookId().getBookId());
-        }
-        databaseAdapter.close();
+//        databaseAdapter = new DatabaseAdapter(this);
+//        List<OrderItem> orderItemsList = databaseAdapter.getOrderItem();
+//        for (OrderItem o : orderItemsList) {
+//            Log.d("Tag", "Giá trị bảng OrderItems: " + o.getBookId().getBookId());
+//        }
+//        databaseAdapter.close();
 
     }
 }

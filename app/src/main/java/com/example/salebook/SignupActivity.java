@@ -1,10 +1,12 @@
 package com.example.salebook;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.text.Layout;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
@@ -39,6 +41,15 @@ public class SignupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
         AnhXa();
+
+        //xử lý sự kiện khi nhấn thanh 3 gạch
+
+        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+        ImageView imvNavigation = findViewById(R.id.imv_navigation);
+        XuLyThanhTruot xuLyThanhTruot = new XuLyThanhTruot(drawerLayout, imvNavigation);
+        xuLyThanhTruot.xuLy();
+
+
         databaseAdapter = new DatabaseAdapter(this);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
