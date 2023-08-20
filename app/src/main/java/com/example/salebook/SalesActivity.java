@@ -6,9 +6,12 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.SearchView;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.salebook.adapter.ProductAdapter;
@@ -25,13 +28,30 @@ public class SalesActivity extends AppCompatActivity {
     private DatabaseAdapter db;
     private List<Book> productlist;
     private SearchView searchView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sales);
         rclProductList = findViewById(R.id.rclproductlist);
+
+
+
         searchView = findViewById(R.id.searhview);
         searchView.clearFocus();
+
+
+        productAdapter = new ProductAdapter();
+        db = new DatabaseAdapter(this);
+        productlist = db.getDataBook();
+        productAdapter.setData(this,productlist);
+        //---- Grid ----
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this,3);
+        gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
+        rclProductList.setLayoutManager(gridLayoutManager);
+        rclProductList.setAdapter(productAdapter);
+
+        // Su Kien Tim Kiem
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -44,15 +64,6 @@ public class SalesActivity extends AppCompatActivity {
                 return false;
             }
         });
-        productAdapter = new ProductAdapter();
-        db = new DatabaseAdapter(this);
-        productlist = db.getDataBook();
-        productAdapter.setData(productlist);
-        //---- Grid ----
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this,3);
-        gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
-        rclProductList.setLayoutManager(gridLayoutManager);
-        rclProductList.setAdapter(productAdapter);
     }
 
     private void searchList(String text) {
@@ -66,9 +77,11 @@ public class SalesActivity extends AppCompatActivity {
             Toast.makeText(this,"Khong tim thay san pham",Toast.LENGTH_SHORT).show();
 
         }else {
-            productAdapter.setData(searchlist);
+            productAdapter.setData(this,searchlist);
         }
     }
+
+
 
 
 }

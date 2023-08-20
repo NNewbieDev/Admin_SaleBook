@@ -199,6 +199,7 @@ public class DatabaseAdapter extends SQLiteOpenHelper {
                 // Retrieve data from the cursor and create YourDataModel objects
                 Book data = new Book();
                 data.setTitle(cursor.getString(cursor.getColumnIndex(COL_BOOK_TITLE)));
+                data.setDescription(cursor.getString(cursor.getColumnIndex(COL_BOOK_DESC)));
                 data.setPrice(cursor.getInt(cursor.getColumnIndex(COL_BOOK_PRICE)));
                 // Set other properties of the data model
                 booklist.add(data);
