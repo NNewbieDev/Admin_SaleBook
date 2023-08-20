@@ -33,6 +33,8 @@ public class SignupActivity extends AppCompatActivity {
     private EditText etAddress;
     private CheckBox cbShowPassword;
     private DatabaseAdapter databaseAdapter;
+    private ImageView imvTrangChu;
+    private ImageView imvInfoUser;
     private User user = new User();
 
 
@@ -48,6 +50,11 @@ public class SignupActivity extends AppCompatActivity {
         ImageView imvNavigation = findViewById(R.id.imv_navigation);
         XuLyThanhTruot xuLyThanhTruot = new XuLyThanhTruot(drawerLayout, imvNavigation);
         xuLyThanhTruot.xuLy();
+        //xử lý sự kiện thanh trượt
+
+        SuKienThanhTruot suKienThanhTruot = new SuKienThanhTruot(this, imvTrangChu, imvInfoUser);
+        suKienThanhTruot.xuLy();
+
 
 
         databaseAdapter = new DatabaseAdapter(this);
@@ -125,6 +132,8 @@ public class SignupActivity extends AppCompatActivity {
         etPhoneNumber = (EditText) findViewById(R.id.et_phone_number);
         etAddress = (EditText) findViewById(R.id.et_address);
         cbShowPassword = (CheckBox) findViewById(R.id.cb_show_password);
+        imvTrangChu = findViewById(R.id.trangchu);
+        imvInfoUser = findViewById(R.id.statistic);
     }
     public boolean checkUserName(String username){
         List<User> userList = databaseAdapter.getAllData();

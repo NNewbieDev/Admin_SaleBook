@@ -19,6 +19,8 @@ public class CartActivity extends AppCompatActivity {
     private OrderItemAdapter orderItemAdapter;
     private DatabaseAdapter databaseAdapter;
     private List<OrderItem> listOrderItem;
+    private ImageView imvTrangChu;
+    private ImageView imvInfoUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,9 +30,16 @@ public class CartActivity extends AppCompatActivity {
 
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
         ImageView imvNavigation = findViewById(R.id.imv_navigation);
+        imvTrangChu = findViewById(R.id.trangchu);
+        imvInfoUser = findViewById(R.id.statistic);
 
         XuLyThanhTruot xuLyThanhTruot = new XuLyThanhTruot(drawerLayout, imvNavigation);
         xuLyThanhTruot.xuLy();
+
+        //xử lý sự kiện thanh trượt
+
+        SuKienThanhTruot suKienThanhTruot = new SuKienThanhTruot(this, imvTrangChu, imvInfoUser);
+        suKienThanhTruot.xuLy();
 
         recyclerViewCar = findViewById(R.id.rec_car);
 

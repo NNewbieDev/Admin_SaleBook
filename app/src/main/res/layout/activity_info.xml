@@ -187,16 +187,16 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/btn_back"
+                    android:id="@+id/btn_logout"
                     android:layout_width="0dp"
                     android:layout_height="60dp"
                     android:layout_marginStart="16dp"
                     android:layout_weight="1"
                     android:backgroundTint="@color/darkorange"
                     android:textColor="@color/lightorange"
-                    android:drawableRight="@drawable/baseline_turn_left_24"
-                    android:text="Trở về"
-                    android:textSize="29sp" />
+                    android:drawableRight="@drawable/baseline_logout_24"
+                    android:text="Đăng xuất"
+                    android:textSize="20sp" />
 
                 <Button
                     android:id="@+id/btn_apply"
@@ -250,7 +250,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/trangchu"
+
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center_horizontal"
@@ -258,6 +258,7 @@
                 android:background="@drawable/oval">
 
                 <ImageView
+                    android:id="@+id/trangchu"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
 
@@ -270,7 +271,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/statistic"
+
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center_horizontal"
@@ -278,6 +279,7 @@
                 android:background="@drawable/oval">
 
                 <ImageView
+                    android:id="@+id/statistic"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:src="@drawable/user_solid"

@@ -30,19 +30,28 @@ public class SalesActivity extends AppCompatActivity {
     private DatabaseAdapter db;
     private List<Book> productlist;
     private SearchView searchView;
+    private ImageView imvTrangChu;
+    private ImageView imvInfoUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sales);
 
+
         //xử lý sự kiện khi nhấn thanh 3 gạch
 
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
         ImageView imvNavigation = findViewById(R.id.imv_navigation);
+        imvTrangChu = findViewById(R.id.trangchu);
+        imvInfoUser = findViewById(R.id.statistic);
 
         XuLyThanhTruot xuLyThanhTruot = new XuLyThanhTruot(drawerLayout, imvNavigation);
         xuLyThanhTruot.xuLy();
+        //xử lý sự kiện thanh trượt
+
+        SuKienThanhTruot suKienThanhTruot = new SuKienThanhTruot(this, imvTrangChu, imvInfoUser);
+        suKienThanhTruot.xuLy();
 
         //xử lý sự kiện khi nhấn vào biểu tượng shop trên toolbar
         ImageView ivShop = findViewById(R.id.iv_shop);

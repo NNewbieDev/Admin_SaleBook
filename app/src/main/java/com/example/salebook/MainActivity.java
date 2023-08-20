@@ -39,6 +39,9 @@ public class MainActivity extends AppCompatActivity {
     private EditText etUsername;
     private EditText etPassword;
     private DatabaseAdapter databaseAdapter;
+    private ImageView imvTrangChu;
+    private ImageView imvInfoUser;
+    private User user;
 
 
     @Override
@@ -46,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Anhxa();
+
         databaseAdapter = new DatabaseAdapter(this);
         //xử lý sự kiện khi nhấn vào biểu tượng shop trên toolbar
         ImageView ivShop = findViewById(iv_shop);
@@ -59,6 +63,16 @@ public class MainActivity extends AppCompatActivity {
 
         XuLyThanhTruot xuLyThanhTruot = new XuLyThanhTruot(drawerLayout, imvNavigation);
         xuLyThanhTruot.xuLy();
+
+
+
+        //xử lý sự kiện thanh trượt
+
+
+        SuKienThanhTruot suKienThanhTruot = new SuKienThanhTruot(this, imvTrangChu, imvInfoUser);
+        suKienThanhTruot.xuLy();
+
+
 
 
 
@@ -76,20 +90,23 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String userName = etUsername.getText().toString();
                 String pass = etPassword.getText().toString();
-                Bundle bundle = new Bundle();
+                user = checkLogin(userName, pass);
+                if (user != null) {
+                    UserManager.getInstance().setCurrentUser(user);
+                    // Tiếp tục xử lý sau khi đăng nhập thành công
+                }
+
                 if (checkLogin(userName, pass) == null)
                     Toast.makeText(getApplicationContext(), "Tên tài khoản hoặc mật khẩu không đúng", Toast.LENGTH_SHORT).show();
                 else if (checkLogin(userName, pass).getRoleId().getRoleId() == 1) {
 
 
                     Intent intent = new Intent(MainActivity.this, SalesActivity.class);
-                    bundle.putSerializable("object_user", checkLogin(userName, pass));
-                    intent.putExtras(bundle);
+
                     startActivity(intent);
                 } else {
                     Intent intent = new Intent(MainActivity.this, AdminActivity.class);
-                    bundle.putSerializable("object_user", checkLogin(userName, pass));
-                    intent.putExtras(bundle);
+
                     startActivity(intent);
                 }
             }
@@ -145,6 +162,8 @@ public class MainActivity extends AppCompatActivity {
         etUsername = (EditText) findViewById(R.id.editTextTextEmailAddress);
         etPassword = (EditText) findViewById(R.id.editTextTextPassword);
         btnLogin = (Button) findViewById(R.id.btn_login);
+        imvTrangChu = findViewById(R.id.trangchu);
+        imvInfoUser = findViewById(R.id.statistic);
 
 //        databaseAdapter = new DatabaseAdapter(this);
 //        List<OrderItem> orderItemsList = databaseAdapter.getOrderItem();

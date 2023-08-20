@@ -29,9 +29,10 @@ public class InfoActivity extends AppCompatActivity {
     private ImageView imvEditAddress;
     private ImageView imvEditPhoneNumber;
     private Button btnApply;
-    private Button btnBack;
+    private Button btnLogout;
     private DatabaseAdapter databaseAdapter;
-
+    private ImageView imvTrangChu;
+    private ImageView imvInfoUser;
 
 
     @Override
@@ -39,6 +40,7 @@ public class InfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info);
         Anhxa();
+
         //xử lý sự kiện khi nhấn thanh 3 gạch
 
         DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
@@ -46,14 +48,20 @@ public class InfoActivity extends AppCompatActivity {
 
         XuLyThanhTruot xuLyThanhTruot = new XuLyThanhTruot(drawerLayout, imvNavigation);
         xuLyThanhTruot.xuLy();
+        //xử lý sự kiện thanh trượt
+
+        SuKienThanhTruot suKienThanhTruot = new SuKienThanhTruot(this, imvTrangChu, imvInfoUser);
+        suKienThanhTruot.xuLy();
+
         databaseAdapter = new DatabaseAdapter(this);
-        User user = (User) getIntent().getExtras().get("object_user");
 
-        if(getIntent().getExtras() != null){
-                tvUserEdit.setText(user.getUsername());
-                tvAddressEdit.setText(user.getAddress());
-                tvPhoneNumberEdit.setText("0" + user.getPhone());
 
+        User currentUser = UserManager.getInstance().getCurrentUser();
+        if (currentUser != null) {
+            // Sử dụng thông tin người dùng, ví dụ: currentUser.getUsername(), currentUser.getRoleId(),...
+            tvUserEdit.setText(currentUser.getUsername());
+            tvAddressEdit.setText(currentUser.getAddress());
+            tvPhoneNumberEdit.setText("0" + currentUser.getPhone());
         }
 
 
@@ -86,12 +94,21 @@ public class InfoActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Tên đăng nhập đã tồn tại!", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    user.setUsername(tvUserEdit.getText().toString());
-                    user.setAddress(tvAddressEdit.getText().toString());
-                    user.setPhone(tvPhoneNumberEdit.getText().toString());
-                    databaseAdapter.updateUser(user);
+                    currentUser.setUsername(tvUserEdit.getText().toString());
+                    currentUser.setAddress(tvAddressEdit.getText().toString());
+                    currentUser.setPhone(tvPhoneNumberEdit.getText().toString());
+                    databaseAdapter.updateUser(currentUser);
                     Toast.makeText(getApplicationContext(), "Áp dụng thành công!", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UserManager.getInstance().logout();
+                Intent intent = new Intent(InfoActivity.this, MainActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -139,7 +156,9 @@ public class InfoActivity extends AppCompatActivity {
         imvEditAddress = findViewById(R.id.iv_edit_address);
         imvEditPhoneNumber = findViewById(R.id.iv_edit_phone_number);
         btnApply = findViewById(R.id.btn_apply);
-        btnBack = findViewById(R.id.btn_back);
+        btnLogout = findViewById(R.id.btn_logout);
+        imvTrangChu = findViewById(R.id.trangchu);
+        imvInfoUser = findViewById(R.id.statistic);
 
 
 

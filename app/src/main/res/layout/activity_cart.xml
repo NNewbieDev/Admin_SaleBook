@@ -139,7 +139,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/trangchu"
+
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center_horizontal"
@@ -147,6 +147,7 @@
                 android:background="@drawable/oval">
 
                 <ImageView
+                    android:id="@+id/trangchu"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
 
@@ -159,7 +160,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/statistic"
+
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center_horizontal"
@@ -167,6 +168,7 @@
                 android:background="@drawable/oval">
 
                 <ImageView
+                    android:id="@+id/statistic"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:src="@drawable/user_solid"
