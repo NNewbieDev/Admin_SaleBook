@@ -6,15 +6,21 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.SearchView;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.salebook.adapter.ProductAdapter;
 
 import com.example.salebook.database.DatabaseAdapter;
 import com.example.salebook.model.Book;
+import com.example.salebook.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +35,11 @@ public class SalesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sales);
+
+        //xử lý sự kiện khi nhấn vào biểu tượng shop trên toolbar
+        ImageView ivShop = findViewById(R.id.iv_shop);
+        OnClickHelper onClickHelper = new OnClickHelper(this);
+        ivShop.setOnClickListener(onClickHelper);
         rclProductList = findViewById(R.id.rclproductlist);
         searchView = findViewById(R.id.searhview);
         searchView.clearFocus();
@@ -69,6 +80,7 @@ public class SalesActivity extends AppCompatActivity {
             productAdapter.setData(searchlist);
         }
     }
+
 
 
 }

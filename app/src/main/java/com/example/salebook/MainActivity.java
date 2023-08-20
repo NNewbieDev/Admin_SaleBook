@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.salebook.database.DatabaseAdapter;
+import com.example.salebook.model.OrderItem;
 import com.example.salebook.model.Role;
 import com.example.salebook.model.User;
 
@@ -58,14 +59,21 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String userName = etUsername.getText().toString();
                 String pass = etPassword.getText().toString();
-                if (checkLogin(userName, pass) == 1) {
+                Bundle bundle = new Bundle();
+                if (checkLogin(userName, pass) == null)
+                    Toast.makeText(getApplicationContext(), "Tên tài khoản hoặc mật khẩu không đúng", Toast.LENGTH_SHORT).show();
+                else if (checkLogin(userName, pass).getRoleId().getRoleId() == 1) {
+
+
                     Intent intent = new Intent(MainActivity.this, SalesActivity.class);
-                    startActivity(intent);
-                } else if (checkLogin(userName, pass) == 2) {
-                    Intent intent = new Intent(MainActivity.this, AdminActivity.class);
+                    bundle.putSerializable("object_user", checkLogin(userName, pass));
+                    intent.putExtras(bundle);
                     startActivity(intent);
                 } else {
-                    Toast.makeText(getApplicationContext(), "Tên tài khoản hoặc mật khẩu không đúng", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(MainActivity.this, AdminActivity.class);
+                    bundle.putSerializable("object_user", checkLogin(userName, pass));
+                    intent.putExtras(bundle);
+                    startActivity(intent);
                 }
             }
         });
@@ -90,19 +98,28 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public int checkLogin(String user, String pasword) {
+//    public int checkLogin(String user, String pasword) {
+//        List<User> userList = databaseAdapter.getUser();
+//        for (User u : userList) {
+//            if (user.equals(u.getUsername().toString()) && pasword.equals(u.getPassword().toString()) &&
+//                    u.getRoleId().getRoleId() == 2) {
+//                return 2;
+//            } else if (user.equals(u.getUsername().toString()) && pasword.equals(u.getPassword().toString())) {
+//                return 1;
+//            }
+//
+//        }
+//        return 0;
+//    }
+
+    public User checkLogin(String user, String pasword) {
         List<User> userList = databaseAdapter.getUser();
         for (User u : userList) {
-            Log.d("Tag", "Giá trị Role: " + u.getRoleId().getRoleId());
-            if (user.equals(u.getUsername().toString()) && pasword.equals(u.getPassword().toString()) &&
-                    u.getRoleId().getRoleId() == 2) {
-                return 2;
-            } else if (user.equals(u.getUsername().toString()) && pasword.equals(u.getPassword().toString())) {
-                return 1;
+            if (user.equals(u.getUsername().toString()) && pasword.equals(u.getPassword().toString())) {
+                return u;
             }
-
         }
-        return 0;
+        return null;
     }
 
     public void Anhxa() {
@@ -111,6 +128,13 @@ public class MainActivity extends AppCompatActivity {
         etUsername = (EditText) findViewById(R.id.editTextTextEmailAddress);
         etPassword = (EditText) findViewById(R.id.editTextTextPassword);
         btnLogin = (Button) findViewById(R.id.btn_login);
+
+        databaseAdapter = new DatabaseAdapter(this);
+        List<OrderItem> orderItemsList = databaseAdapter.getOrderItem();
+        for (OrderItem o : orderItemsList) {
+            Log.d("Tag", "Giá trị bảng OrderItems: " + o.getBookId().getBookId());
+        }
+        databaseAdapter.close();
 
     }
 }

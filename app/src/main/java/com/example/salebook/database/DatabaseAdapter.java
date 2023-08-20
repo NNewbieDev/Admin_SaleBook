@@ -13,6 +13,8 @@ import androidx.annotation.Nullable;
 
 import com.example.salebook.model.Book;
 import com.example.salebook.model.Category;
+import com.example.salebook.model.Order;
+import com.example.salebook.model.OrderItem;
 import com.example.salebook.model.Role;
 import com.example.salebook.model.User;
 
@@ -220,9 +222,12 @@ public class DatabaseAdapter extends SQLiteOpenHelper {
                 User data = new User();
                 data.setUsername(cursor.getString(cursor.getColumnIndex(COL_USERNAME)));
                 data.setPassword(cursor.getString(cursor.getColumnIndex(COL_PASSWORD)));
+                data.setAddress(cursor.getString(cursor.getColumnIndex(COL_ADDRESS)));
+                data.setPhone(cursor.getString(cursor.getColumnIndex(COL_PHONE)));
+                data.setEmail(cursor.getString(cursor.getColumnIndex(COL_EMAIL)));
+                data.setUserId(cursor.getInt(cursor.getColumnIndex(COL_USER_ID)));
 
-//                data.setPassword(cursor.getString(cursor.getColumnIndex(COL_PASSWORD)));
-//                data.setPassword(cursor.getString(cursor.getColumnIndex(COL_PASSWORD)));
+
                 int roleId = cursor.getInt(cursor.getColumnIndex(COL_ROLE_ID));
 
                 // Tạo và gán đối tượng Role cho User
@@ -462,6 +467,31 @@ public class DatabaseAdapter extends SQLiteOpenHelper {
             return true;
         }
     }
+    public void updateUser(User user) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(COL_USERNAME, user.getUsername());
+        values.put(COL_PASSWORD, user.getPassword());
+        values.put(COL_ADDRESS, user.getAddress());
+        values.put(COL_PHONE, user.getPhone());
+
+        // Define the WHERE clause
+        String selection = COL_USER_ID + " = ?";
+        String[] selectionArgs = {String.valueOf(user.getUserId())};
+
+        // Perform the update operation
+        int rowsUpdated = db.update(TABLE_USER, values, selection, selectionArgs);
+
+        if (rowsUpdated > 0) {
+            Log.d("DatabaseAdapter", "Chỉnh sửa thông tin user thành công!");
+        } else {
+            Log.d("DatabaseAdapter", "Chỉnh sửa thông tin user không thành công!");
+        }
+
+        db.close();
+    }
+
     public boolean updateBookInfo(String checkTitle, String title, String author,
                                   String pub, String img, String dimens,
                                   int price, int page, String desc, int quantity,
@@ -512,4 +542,131 @@ public class DatabaseAdapter extends SQLiteOpenHelper {
             return true;
         }
     }
+    public boolean addOrder(String orderDate, int orderTotal, int userId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(COL_ORDER_DATE, orderDate);
+        values.put(COL_ORDER_TOTAL, orderTotal);
+        values.put(COL_USER_ID, userId);
+
+        long newRow = db.insert(TABLE_ORDERS, null, values);
+        db.close();
+        return newRow != -1;
+    }
+
+    @SuppressLint("Range")
+    public List<Order> getOrder() {
+        List<Order> orderList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE_ORDERS;
+        Cursor cursor = db.rawQuery(query, null);
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                Order order = new Order();
+                order.setOrderId(cursor.getInt(cursor.getColumnIndex(COL_ORDER_ID)));
+                //order.setOrderDate(cursor.getString(cursor.getColumnIndex(COL_ORDER_DATE)));
+                order.setTotalAmount(cursor.getInt(cursor.getColumnIndex(COL_ORDER_TOTAL)));
+                //order.setUserId(cursor.getInt(cursor.getColumnIndex(COL_USER_ID)));
+
+                orderList.add(order);
+            } while (cursor.moveToNext());
+            cursor.close();
+        }
+        db.close();
+        return orderList;
+    }
+    // Thêm một mặt hàng vào bảng OrderItems
+    public boolean addOrderItem(int orderId, int bookId, int quantity, int debt) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(COL_ORDER_ID, orderId);
+        values.put(COL_BOOK_ID, bookId);
+        values.put(COL_ITEM_QUANTITY, quantity);
+        values.put(COL_ITEM_DEBT, debt);
+
+        long newRow = db.insert(TABLE_ORDER_ITEMS, null, values);
+        db.close();
+        return newRow != -1;
+    }
+//    @SuppressLint("Range")
+//    public List<OrderItem> getOrderItem() {
+//        List<OrderItem> orderItemList = new ArrayList<>();
+//        SQLiteDatabase db = this.getReadableDatabase();
+//        String query = "SELECT * FROM " + TABLE_ORDER_ITEMS;
+//        Cursor cursor = db.rawQuery(query, null);
+//        if (cursor != null && cursor.moveToFirst()) {
+//            do {
+//                OrderItem orderItem = new OrderItem();
+//                orderItem.setOrderId(cursor.getInt(cursor.getColumnIndex(COL_ITEM_ID)));
+//                orderItem.setOrderId(cursor.getInt(cursor.getColumnIndex(COL_ORDER_ID)));
+//
+//                orderItem.setQuantity(cursor.getInt(cursor.getColumnIndex(COL_ITEM_QUANTITY)));
+//                orderItem.setDebt(cursor.getInt(cursor.getColumnIndex(COL_ITEM_DEBT)));
+//
+//
+//                int bookId = cursor.getInt(cursor.getColumnIndex(COL_BOOK_ID));
+//                int orderId = cursor.getInt(cursor.getColumnIndex(COL_ORDER_ID));
+//
+//                // Tạo và gán đối tượng book cho orderitem
+////                Book book = new Book();
+////                book.setBookId(bookId);
+////                orderItem.setBookId(book);
+//                Order order = new Order();
+//                order.setOrderId(orderId);
+//                orderItem.setOrderId(order);
+//                orderItem.setBookId(cursor.getInt(cursor.getColumnIndex(COL_BOOK_ID)));
+//
+//                orderItemList.add(orderItem);
+//            } while (cursor.moveToNext());
+//            cursor.close();
+//        }
+//        db.close();
+//        return orderItemList;
+//    }
+
+    @SuppressLint("Range")
+    public List<OrderItem> getOrderItem() {
+        List<OrderItem> orderItemList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE_ORDER_ITEMS +
+                " INNER JOIN " + TABLE_ORDERS + " ON " + TABLE_ORDER_ITEMS + "." + COL_ORDER_ID + " = " + TABLE_ORDERS + "." + COL_ORDER_ID +
+                " INNER JOIN " + TABLE_BOOK + " ON " + TABLE_ORDER_ITEMS + "." + COL_BOOK_ID + " = " + TABLE_BOOK + "." + COL_BOOK_ID;
+        Cursor cursor = db.rawQuery(query, null);
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                OrderItem orderItem = new OrderItem();
+                //orderItem.(cursor.getInt(cursor.getColumnIndex(COL_ITEM_ID)));
+                //orderItem.setOrderId(cursor.getInt(cursor.getColumnIndex(COL_ORDER_ID)));
+                orderItem.setQuantity(cursor.getInt(cursor.getColumnIndex(COL_ITEM_QUANTITY)));
+                //orderItem.setDebt(cursor.getInt(cursor.getColumnIndex(COL_ITEM_DEBT)));
+
+                // Lấy thông tin từ bảng Books
+                Book book = new Book();
+                book.setBookId(cursor.getInt(cursor.getColumnIndex(TABLE_BOOK + "." + COL_BOOK_ID)));
+                //book.setPrice(cursor.getInt(cursor.getColumnIndex(TABLE_BOOK + "." + COL_BOOK_PRICE)));
+                book.setTitle(cursor.getString(cursor.getColumnIndex(COL_BOOK_TITLE)));
+
+                // Gán thông tin sách cho orderItem
+                orderItem.setBookId(book);
+
+
+                // Lấy thông tin từ bảng Orders
+                Order order = new Order();
+                order.setOrderId(cursor.getInt(cursor.getColumnIndex(TABLE_ORDERS + "." + COL_ORDER_ID)));
+                // Gán thông tin đơn hàng cho orderItem
+                orderItem.setOrderId(order);
+
+                orderItemList.add(orderItem);
+            } while (cursor.moveToNext());
+            cursor.close();
+        }
+        db.close();
+        return orderItemList;
+    }
+
+
+
+
 }

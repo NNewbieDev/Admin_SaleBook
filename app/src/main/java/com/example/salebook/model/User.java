@@ -17,10 +17,11 @@ import com.example.salebook.database.DatabaseAdapter;
 
 import org.w3c.dom.Text;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class User {
+public class User implements Serializable {
     private int userId;
     private String username;
     private String password;
