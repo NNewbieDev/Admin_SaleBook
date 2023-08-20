@@ -99,8 +99,8 @@
                 android:textSize="22sp" />
 
             <ScrollView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_width= "0dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:scrollbars="horizontal">
 
@@ -110,7 +110,6 @@
                     android:layout_height="match_parent"
                     android:layout_marginStart="4dp"
                     android:background="@color/darkorange"
-                    android:layout_gravity="center_vertical"
                     android:paddingStart="15dp"
                     android:paddingEnd="15dp"
                     android:text="A30, đường ABC"
