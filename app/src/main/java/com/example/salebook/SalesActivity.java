@@ -19,6 +19,7 @@ import com.example.salebook.adapter.ProductAdapter;
 
 import com.example.salebook.database.DatabaseAdapter;
 import com.example.salebook.model.Book;
+import com.example.salebook.model.Category;
 import com.example.salebook.model.User;
 
 import java.util.ArrayList;
@@ -59,7 +60,6 @@ public class SalesActivity extends AppCompatActivity {
         ivShop.setOnClickListener(onClickHelper);
         rclProductList = findViewById(R.id.rclproductlist);
 
-
         searchView = findViewById(R.id.searhview);
         searchView.clearFocus();
 
@@ -89,6 +89,7 @@ public class SalesActivity extends AppCompatActivity {
         });
     }
 
+
     private void searchList(String text) {
         List<Book> searchlist = new ArrayList<>();
         for (Book book : productlist) {
@@ -101,6 +102,14 @@ public class SalesActivity extends AppCompatActivity {
 
         } else {
             productAdapter.setData(this, searchlist);
+        }
+    }
+
+    @Override
+    protected void onDestroy() { // Giải phóng biến môi trường context
+        super.onDestroy();
+        if(productAdapter != null){
+            productAdapter.release();
         }
     }
 }
