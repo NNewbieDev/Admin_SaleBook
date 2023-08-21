@@ -3,10 +3,12 @@ package com.example.salebook;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.example.salebook.adapter.OrderItemAdapter;
 import com.example.salebook.database.DatabaseAdapter;
@@ -48,11 +50,10 @@ public class CartActivity extends AppCompatActivity {
         listOrderItem = databaseAdapter.getOrderItem();
 
         orderItemAdapter.setData(listOrderItem);
-//
-        //---- Grid ----
-//        GridLayoutManager gridLayoutManager = new GridLayoutManager(this,3);
-//        gridLayoutManager.setOrientation(GridLayoutManager.VERTICAL);
-//        recyclerViewCar.setLayoutManager(gridLayoutManager);
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerViewCar.setLayoutManager(linearLayoutManager);
         recyclerViewCar.setAdapter(orderItemAdapter);
     }
 }

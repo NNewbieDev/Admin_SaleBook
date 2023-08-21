@@ -55,7 +55,7 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.View
             // Không thể truy cập thông tin, xử lý tùy theo trường hợp
             return;
         }
-        Log.d("Tag", "Giá sách: " +  orderItem.getBookId().getTitle());
+        //Log.d("Tag", "Giá sách: " +  orderItem.getBookId().getTitle());
 
         holder.tvPrice.setText(String.valueOf(orderItem.getBookId().getPrice()));
         holder.tvInfo.setText(orderItem.getBookId().getTitle());

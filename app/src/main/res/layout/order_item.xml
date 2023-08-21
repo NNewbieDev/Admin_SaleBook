@@ -1,42 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/orange">
+    android:background="@drawable/rounded_edittext"
+    android:layout_marginBottom="10dp">
 
-    <ImageView
-        android:id="@+id/imv_book"
-        android:layout_width="80dp"
-        android:layout_height="120dp"
-        android:src="@drawable/img_0" />
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@+id/imv_book"
-        android:layout_centerVertical="true"
         android:layout_marginStart="10dp"
-        android:orientation="vertical">
-        <TextView
-            android:id="@+id/tv_info"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp">
+
+        <ImageView
+            android:id="@+id/imv_book"
+            android:layout_width="80dp"
+            android:layout_height="120dp"
+            android:src="@drawable/img_0" />
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Thông tin sách"
-            android:textColor="@color/darkorange"
+            android:layout_toEndOf="@+id/imv_book"
             android:layout_toRightOf="@+id/imv_book"
-            android:layout_marginLeft="10dp"
             android:layout_centerVertical="true"
-            android:layout_marginBottom="15dp"
-            android:textSize="20sp" />
-        <TextView
-            android:id="@+id/tv_price"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="1,260,000"
+            android:layout_marginStart="10dp"
             android:layout_marginLeft="10dp"
-            android:textColor="@color/darkorange"
-            android:layout_marginTop="4dp"
-            android:textSize="25sp" />
+            android:orientation="vertical">
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/tv_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Thông tin sách"
+                android:textColor="@color/darkorange"
+                android:layout_marginTop="5dp"
+                android:textSize="20sp" />
 
-</RelativeLayout>
+            <TextView
+                android:id="@+id/tv_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="1,260,000"
+                android:textColor="@color/darkorange"
+                android:layout_marginTop="4dp"
+                android:textSize="25sp" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

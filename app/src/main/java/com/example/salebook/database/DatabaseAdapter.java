@@ -632,8 +632,14 @@ public class DatabaseAdapter extends SQLiteOpenHelper {
         List<OrderItem> orderItemList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT * FROM " + TABLE_ORDER_ITEMS +
-                " INNER JOIN " + TABLE_ORDERS + " ON " + TABLE_ORDER_ITEMS + "." + COL_ORDER_ID + " = " + TABLE_ORDERS + "." + COL_ORDER_ID +
-                " INNER JOIN " + TABLE_BOOK + " ON " + TABLE_ORDER_ITEMS + "." + COL_BOOK_ID + " = " + TABLE_BOOK + "." + COL_BOOK_ID;
+                " INNER JOIN " + TABLE_ORDERS + " ON " + TABLE_ORDER_ITEMS + "." +
+                COL_ORDER_ID + " = " + TABLE_ORDERS + "." + COL_ORDER_ID +
+                " INNER JOIN " + TABLE_BOOK + " ON " + TABLE_ORDER_ITEMS + "." +
+                COL_BOOK_ID + " = " + TABLE_BOOK + "." + COL_BOOK_ID;
+//        String query = "SELECT oi.*, b.* FROM " + TABLE_ORDER_ITEMS + " oi " +
+//                "INNER JOIN " + TABLE_BOOK + " b ON oi." + COL_BOOK_ID + " = b." + COL_BOOK_ID;
+        int i =0;
+
         Cursor cursor = db.rawQuery(query, null);
         if (cursor != null && cursor.moveToFirst()) {
             do {
@@ -645,9 +651,15 @@ public class DatabaseAdapter extends SQLiteOpenHelper {
 
                 // Lấy thông tin từ bảng Books
                 Book book = new Book();
-                book.setBookId(cursor.getInt(cursor.getColumnIndex(TABLE_BOOK + "." + COL_BOOK_ID)));
+                //book.setBookId(cursor.getInt(cursor.getColumnIndex(TABLE_BOOK + "." + COL_BOOK_ID)));
                 //book.setPrice(cursor.getInt(cursor.getColumnIndex(TABLE_BOOK + "." + COL_BOOK_PRICE)));
+                book.setBookId(cursor.getInt(cursor.getColumnIndex(COL_BOOK_ID)));
                 book.setTitle(cursor.getString(cursor.getColumnIndex(COL_BOOK_TITLE)));
+                book.setPrice(cursor.getInt(cursor.getColumnIndex(COL_BOOK_PRICE)));
+
+                Log.d("Tag", "Số lần lặp: "+ ++i);
+
+
 
                 // Gán thông tin sách cho orderItem
                 orderItem.setBookId(book);
@@ -655,7 +667,8 @@ public class DatabaseAdapter extends SQLiteOpenHelper {
 
                 // Lấy thông tin từ bảng Orders
                 Order order = new Order();
-                order.setOrderId(cursor.getInt(cursor.getColumnIndex(TABLE_ORDERS + "." + COL_ORDER_ID)));
+//                order.setOrderId(cursor.getInt(cursor.getColumnIndex(TABLE_ORDERS + "." + COL_ORDER_ID)));
+                order.setOrderId(cursor.getInt(cursor.getColumnIndex(COL_ORDER_ID)));
                 // Gán thông tin đơn hàng cho orderItem
                 orderItem.setOrderId(order);
 
