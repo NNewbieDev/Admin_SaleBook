@@ -19,6 +19,7 @@ import com.example.salebook.adapter.ProductAdapter;
 
 import com.example.salebook.database.DatabaseAdapter;
 import com.example.salebook.model.Book;
+import com.example.salebook.model.Category;
 import com.example.salebook.model.User;
 
 import java.util.ArrayList;
@@ -59,7 +60,6 @@ public class SalesActivity extends AppCompatActivity {
         ivShop.setOnClickListener(onClickHelper);
         rclProductList = findViewById(R.id.rclproductlist);
 
-
         searchView = findViewById(R.id.searhview);
         searchView.clearFocus();
 
@@ -88,6 +88,7 @@ public class SalesActivity extends AppCompatActivity {
             }
         });
     }
+
 
     private void searchList(String text) {
         List<Book> searchlist = new ArrayList<>();

@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         Anhxa();
 
         databaseAdapter = new DatabaseAdapter(this);
+
         //xử lý sự kiện khi nhấn vào biểu tượng shop trên toolbar
         ImageView ivShop = findViewById(iv_shop);
         OnClickHelper onClickHelper = new OnClickHelper(this);

@@ -203,6 +203,7 @@ public class DatabaseAdapter extends SQLiteOpenHelper {
                 data.setTitle(cursor.getString(cursor.getColumnIndex(COL_BOOK_TITLE)));
                 data.setDescription(cursor.getString(cursor.getColumnIndex(COL_BOOK_DESC)));
                 data.setPrice(cursor.getInt(cursor.getColumnIndex(COL_BOOK_PRICE)));
+                data.setImage(cursor.getString(cursor.getColumnIndex(COL_BOOK_IMG)));
                 // Set other properties of the data model
                 booklist.add(data);
             } while (cursor.moveToNext());
@@ -445,6 +446,7 @@ public class DatabaseAdapter extends SQLiteOpenHelper {
         return newRow == -1 ? false : true;
     }
 
+
     //    UPDATE METHODS
     public boolean updateUserInfo(String checkUser, String newUser, String password , int newRole) {
 
@@ -632,8 +634,8 @@ public class DatabaseAdapter extends SQLiteOpenHelper {
         List<OrderItem> orderItemList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT * FROM " + TABLE_ORDER_ITEMS +
-                " INNER JOIN " + TABLE_ORDERS + " ON " + TABLE_ORDER_ITEMS + "." +
-                COL_ORDER_ID + " = " + TABLE_ORDERS + "." + COL_ORDER_ID +
+//                " INNER JOIN " + TABLE_ORDERS + " ON " + TABLE_ORDER_ITEMS + "." +
+//                COL_ORDER_ID + " = " + TABLE_ORDERS + "." + COL_ORDER_ID +
                 " INNER JOIN " + TABLE_BOOK + " ON " + TABLE_ORDER_ITEMS + "." +
                 COL_BOOK_ID + " = " + TABLE_BOOK + "." + COL_BOOK_ID;
 //        String query = "SELECT oi.*, b.* FROM " + TABLE_ORDER_ITEMS + " oi " +
