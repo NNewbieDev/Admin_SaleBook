@@ -493,6 +493,31 @@ public class DatabaseAdapter extends SQLiteOpenHelper {
         db.close();
     }
 
+    public void updateOrderItem(OrderItem orderItem) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(COL_ITEM_QUANTITY, orderItem.getQuantity());
+//        values.put(COL_I, orderItem.getPrice());
+//        values.put(COL_ADDRESS, orderItem.getAddress());
+//        values.put(COL_PHONE, orderItem.getPhone());
+
+        // Define the WHERE clause
+        String selection = COL_ITEM_ID  + " = ?";
+        String[] selectionArgs = {String.valueOf(orderItem.getItemId())};
+
+        // Perform the update operation
+        int rowsUpdated = db.update(TABLE_ORDER_ITEMS, values, selection, selectionArgs);
+
+        if (rowsUpdated > 0) {
+            Log.d("DatabaseAdapter", "Chỉnh sửa thông tin orderItem thành công!");
+        } else {
+            Log.d("DatabaseAdapter", "Chỉnh sửa thông tin orderItem không thành công!");
+        }
+
+        db.close();
+    }
+
     public boolean updateBookInfo(String checkTitle, String title, String author,
                                   String pub, String img, String dimens,
                                   int price, int page, String desc, int quantity,
@@ -638,7 +663,6 @@ public class DatabaseAdapter extends SQLiteOpenHelper {
                 COL_BOOK_ID + " = " + TABLE_BOOK + "." + COL_BOOK_ID;
 //        String query = "SELECT oi.*, b.* FROM " + TABLE_ORDER_ITEMS + " oi " +
 //                "INNER JOIN " + TABLE_BOOK + " b ON oi." + COL_BOOK_ID + " = b." + COL_BOOK_ID;
-        int i =0;
 
         Cursor cursor = db.rawQuery(query, null);
         if (cursor != null && cursor.moveToFirst()) {
@@ -656,9 +680,6 @@ public class DatabaseAdapter extends SQLiteOpenHelper {
                 book.setBookId(cursor.getInt(cursor.getColumnIndex(COL_BOOK_ID)));
                 book.setTitle(cursor.getString(cursor.getColumnIndex(COL_BOOK_TITLE)));
                 book.setPrice(cursor.getInt(cursor.getColumnIndex(COL_BOOK_PRICE)));
-
-                Log.d("Tag", "Số lần lặp: "+ ++i);
-
 
 
                 // Gán thông tin sách cho orderItem

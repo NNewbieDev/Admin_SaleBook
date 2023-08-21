@@ -9,11 +9,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.salebook.adapter.OrderItemAdapter;
 import com.example.salebook.database.DatabaseAdapter;
 import com.example.salebook.model.OrderItem;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CartActivity extends AppCompatActivity {
@@ -23,6 +25,7 @@ public class CartActivity extends AppCompatActivity {
     private List<OrderItem> listOrderItem;
     private ImageView imvTrangChu;
     private ImageView imvInfoUser;
+    private TextView tvTotalMoney;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +38,7 @@ public class CartActivity extends AppCompatActivity {
         imvTrangChu = findViewById(R.id.trangchu);
         imvInfoUser = findViewById(R.id.statistic);
 
+
         XuLyThanhTruot xuLyThanhTruot = new XuLyThanhTruot(drawerLayout, imvNavigation);
         xuLyThanhTruot.xuLy();
 
@@ -45,9 +49,11 @@ public class CartActivity extends AppCompatActivity {
 
         recyclerViewCar = findViewById(R.id.rec_car);
 
-        orderItemAdapter = new OrderItemAdapter();
+
         databaseAdapter = new DatabaseAdapter(this);
         listOrderItem = databaseAdapter.getOrderItem();
+        databaseAdapter.close();
+        orderItemAdapter = new OrderItemAdapter((ArrayList<OrderItem>) listOrderItem, this);
 
         orderItemAdapter.setData(listOrderItem);
 
@@ -55,5 +61,33 @@ public class CartActivity extends AppCompatActivity {
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerViewCar.setLayoutManager(linearLayoutManager);
         recyclerViewCar.setAdapter(orderItemAdapter);
+
+
+        tvTotalMoney = findViewById(R.id.tv_total_money);
+        int price = 0;
+        for (OrderItem o: listOrderItem) {
+            price += o.getQuantity()*o.getBookId().getPrice();
+
+        }
+        tvTotalMoney.setText(price + "đ");
+        orderItemAdapter.setQuantityChangeListener(new OrderItemAdapter.QuantityChangeListener() {
+            @Override
+            public void onQuantityChanged() {
+                // Do something when the overall quantity changes
+            }
+
+            @Override
+            public void onQuantityChangedForPosition(int position) {
+                // Do something when the quantity of a specific item changes
+                // Update the total price based on the changed item's position
+                //int newPrice = listOrderItem.get(position).getQuantity() * listOrderItem.get(position).getBookId().getPrice();
+                int newPrice = 0;
+                for (OrderItem o: listOrderItem) {
+                    newPrice += o.getQuantity()*o.getBookId().getPrice();
+
+                }
+                tvTotalMoney.setText(newPrice + "đ");
+            }
+        });
     }
 }

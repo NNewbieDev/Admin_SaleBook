@@ -1,6 +1,10 @@
 package com.example.salebook.model;
 
 public class OrderItem {
+    private int itemId;
+
+
+
     private Order orderId;
     private Book bookId;
     private int quantity;
@@ -14,6 +18,10 @@ public class OrderItem {
         this.bookId = bookId;
         this.quantity = quantity;
         this.price = price;
+    }
+
+    public int getItemId() {
+        return itemId;
     }
 
     public Order getOrderId() {
