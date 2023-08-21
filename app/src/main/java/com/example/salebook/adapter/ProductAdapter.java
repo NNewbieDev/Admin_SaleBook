@@ -6,9 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,7 +18,6 @@ import com.example.salebook.DetailProduct;
 import com.example.salebook.R;
 import com.example.salebook.database.DatabaseAdapter;
 import com.example.salebook.model.Book;
-import com.example.salebook.model.User;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -61,9 +58,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         String formattedPrice = formatPrice(price);
         holder.txtprice.setText(formattedPrice);
 
-        // Sử dụng Glide để tải và hiển thị ảnh
+        // Thư Viện Gilde
         Glide.with(context)
-                .load(book.getImage()) // Đường dẫn ảnh từ đối tượng Book, có thể là book.getImageUrl() hoặc phương thức khác tùy vào cấu trúc dữ liệu của bạn
+                .load(book.getImage())
                 .into(holder.imgproduct);
 
         holder.layoutItem.setOnClickListener(new View.OnClickListener() {
@@ -73,8 +70,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
             }
         });
-//        holder.imgproduct.setImageResource(listProduct.get(position).getImage());
 
+    }
+    public void release(){
+        context = null;
     }
     private String formatPrice(double price){
         NumberFormat format =NumberFormat.getCurrencyInstance(new Locale("vi","VN"));

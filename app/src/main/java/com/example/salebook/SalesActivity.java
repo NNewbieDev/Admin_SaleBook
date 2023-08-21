@@ -104,6 +104,14 @@ public class SalesActivity extends AppCompatActivity {
             productAdapter.setData(this, searchlist);
         }
     }
+
+    @Override
+    protected void onDestroy() { // Giải phóng biến môi trường context
+        super.onDestroy();
+        if(productAdapter != null){
+            productAdapter.release();
+        }
+    }
 }
 
 
