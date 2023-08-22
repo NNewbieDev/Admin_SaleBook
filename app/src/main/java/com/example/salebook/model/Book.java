@@ -1,6 +1,8 @@
 package com.example.salebook.model;
 
-public class Book {
+import java.io.Serializable;
+
+public class Book implements Serializable {
     private int bookId;
     private String title;
     private String author;
@@ -11,7 +13,16 @@ public class Book {
     private double rating;
     private int pages;
     private String dimension;
+    private String description;
     private Category categoriesId;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public Book() {
     }

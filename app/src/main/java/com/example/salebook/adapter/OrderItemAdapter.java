@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -50,16 +49,18 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull OrderItemAdapter.ViewHoler holder, int position) {
-        OrderItem orderItem = listOrderItem.get(0);
+        OrderItem orderItem = listOrderItem.get(position);
 
         if (orderItem == null || orderItem.getBookId() == null) {
             // Không thể truy cập thông tin, xử lý tùy theo trường hợp
             return;
         }
-//        Log.d("Tag", "Giá sách: " );
-//        Toast.makeText(holder.itemView.getContext(), "Gia sach", Toast.LENGTH_SHORT).show();
+        //Log.d("Tag", "Giá sách: " +  orderItem.getBookId().getTitle());
+
         holder.tvPrice.setText(String.valueOf(orderItem.getBookId().getPrice()));
         holder.tvInfo.setText(orderItem.getBookId().getTitle());
+
+
     }
 
     @Override

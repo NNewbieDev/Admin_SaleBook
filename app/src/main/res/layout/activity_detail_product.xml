@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/img_product"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/img_0" />
+
+        <TextView
+            android:id="@+id/txt_detail_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="@string/app_name"
+            android:textColor="@color/black"
+            android:textSize="16dp" />
+
+        <TextView
+            android:id="@+id/txt_detail_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="@string/app_name"
+            android:textColor="@color/black"
+            android:layout_marginLeft="250dp"
+            android:textSize="16dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/inputTitle"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/orange"
+                android:drawablePadding="10dp"
+                android:drawableTint="@color/blueAdmin"
+                android:hint="Mô Tả Chi Tiết Sản Phẩm"
+                android:textSize="25dp"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="10dp" />
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="383dp">
+
+            <TextView
+                android:id="@+id/txtdetailproduct"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+        </ScrollView>
+
+        <Button
+            android:id="@+id/btnAddproduct"
+            android:layout_width="match_parent"
+            android:layout_height="74dp"
+            android:text="Thêm Vào Giỏ Hàng" />
+
+
+    </LinearLayout>
+
+</RelativeLayout>
