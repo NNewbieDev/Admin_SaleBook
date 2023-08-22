@@ -96,7 +96,7 @@ public class DatabaseAdapter extends SQLiteOpenHelper {
                     " TEXT)";
             String queryOrderItem = "CREATE TABLE " + TABLE_ORDER_ITEMS + "( " + COL_ITEM_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     COL_ORDER_ID + " INTEGER NOT NULL, " + COL_BOOK_ID +
-                    " INTEGER NOT NULL, " + COL_ITEM_QUANTITY +
+                    " INTEGER NOT NULL DEFAULT 1, " + COL_ITEM_QUANTITY +
                     " INTEGER, " + COL_ITEM_DEBT +
                     " INTEGER, " +
                     "FOREIGN KEY (" + COL_ORDER_ID + ") REFERENCES " + TABLE_ORDERS + "(" + COL_ORDER_ID + "), " +
@@ -129,6 +129,7 @@ public class DatabaseAdapter extends SQLiteOpenHelper {
     }
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+        onCreate(sqLiteDatabase);
     }
     public void defaultRole(SQLiteDatabase db) {
         ContentValues values = new ContentValues();
@@ -665,8 +666,4 @@ public class DatabaseAdapter extends SQLiteOpenHelper {
         db.close();
         return orderItemList;
     }
-
-
-
-
 }
