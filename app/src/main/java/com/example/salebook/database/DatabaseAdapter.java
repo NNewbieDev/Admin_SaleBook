@@ -201,6 +201,7 @@ public class DatabaseAdapter extends SQLiteOpenHelper {
             do {
                 // Retrieve data from the cursor and create YourDataModel objects
                 Book data = new Book();
+                data.setBookId(cursor.getInt(cursor.getColumnIndex(COL_BOOK_ID)));
                 data.setTitle(cursor.getString(cursor.getColumnIndex(COL_BOOK_TITLE)));
                 data.setDescription(cursor.getString(cursor.getColumnIndex(COL_BOOK_DESC)));
                 data.setPrice(cursor.getInt(cursor.getColumnIndex(COL_BOOK_PRICE)));
@@ -614,6 +615,19 @@ public class DatabaseAdapter extends SQLiteOpenHelper {
         values.put(COL_BOOK_ID, bookId);
         values.put(COL_ITEM_QUANTITY, quantity);
         values.put(COL_ITEM_DEBT, debt);
+
+        long newRow = db.insert(TABLE_ORDER_ITEMS, null, values);
+        db.close();
+        return newRow != -1;
+    }
+    public boolean addOrderItem(int bookId, int quantity) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        //values.put(COL_ORDER_ID, orderId);
+        values.put(COL_BOOK_ID, bookId);
+        values.put(COL_ITEM_QUANTITY, quantity);
+        //values.put(COL_ITEM_DEBT, debt);
 
         long newRow = db.insert(TABLE_ORDER_ITEMS, null, values);
         db.close();

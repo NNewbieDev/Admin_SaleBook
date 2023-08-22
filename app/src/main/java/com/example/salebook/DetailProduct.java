@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,7 +18,8 @@ import java.text.NumberFormat;
 import java.util.List;
 import java.util.Locale;
 
-public class    DetailProduct extends AppCompatActivity {
+public class DetailProduct extends AppCompatActivity {
+    private DatabaseAdapter db;
 
 
     @Override
@@ -29,6 +31,7 @@ public class    DetailProduct extends AppCompatActivity {
         TextView txtDetailPrice = findViewById(R.id.txt_detail_price);
         TextView txtDetailProduct = findViewById(R.id.txtdetailproduct);
         Button btnAddProduct = findViewById(R.id.btnAddproduct);
+        db = new DatabaseAdapter(this);
 
 
         Bundle bundle = getIntent().getExtras();
@@ -44,6 +47,16 @@ public class    DetailProduct extends AppCompatActivity {
         Glide.with(this)
                 .load(book.getImage()) // Đường dẫn ảnh từ đối tượng Book
                 .into(imgDetail); // ImageView để hiển thị hình ảnh
+
+        btnAddProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DetailProduct.this, CartActivity.class);
+                db.addOrderItem(1, book.getBookId(), 1, 50);
+                db.close();
+                startActivity(intent);
+            }
+        });
 
 
 
