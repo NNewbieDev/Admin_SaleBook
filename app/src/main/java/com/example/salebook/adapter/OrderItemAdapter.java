@@ -78,6 +78,8 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.View
             tvPrice = itemView.findViewById(R.id.tv_price);
             etSoLuong = itemView.findViewById(R.id.et_soluong);
             imvBook = itemView.findViewById(R.id.imv_book);
+
+
         }
 
         public void bind(int position) {
@@ -103,6 +105,7 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.View
 
                 @Override
                 public void onTextChanged(CharSequence s, int start, int before, int count) {
+
                     int newQuantity = 0;
                     try {
                         newQuantity = Integer.parseInt(s.toString());

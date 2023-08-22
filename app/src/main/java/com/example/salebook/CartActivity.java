@@ -26,6 +26,7 @@ public class CartActivity extends AppCompatActivity {
     private ImageView imvTrangChu;
     private ImageView imvInfoUser;
     private TextView tvTotalMoney;
+    private TextView tvTotalQuantity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,18 +63,22 @@ public class CartActivity extends AppCompatActivity {
         recyclerViewCar.setLayoutManager(linearLayoutManager);
         recyclerViewCar.setAdapter(orderItemAdapter);
 
-
+        tvTotalQuantity =findViewById(R.id.tv_tongsoluong);
         tvTotalMoney = findViewById(R.id.tv_total_money);
+        int quantity = 0;
         int price = 0;
         for (OrderItem o: listOrderItem) {
+            quantity += o.getQuantity();
             price += o.getQuantity()*o.getBookId().getPrice();
 
         }
+        tvTotalQuantity.setText(quantity+" ");
         tvTotalMoney.setText(price + "đ");
         orderItemAdapter.setQuantityChangeListener(new OrderItemAdapter.QuantityChangeListener() {
             @Override
             public void onQuantityChanged() {
                 // Do something when the overall quantity changes
+
             }
 
             @Override
@@ -82,10 +87,13 @@ public class CartActivity extends AppCompatActivity {
                 // Update the total price based on the changed item's position
                 //int newPrice = listOrderItem.get(position).getQuantity() * listOrderItem.get(position).getBookId().getPrice();
                 int newPrice = 0;
+                int newQuantity = 0;
                 for (OrderItem o: listOrderItem) {
+                    newQuantity +=o.getQuantity();
                     newPrice += o.getQuantity()*o.getBookId().getPrice();
 
                 }
+                tvTotalQuantity.setText(newQuantity+" ");
                 tvTotalMoney.setText(newPrice + "đ");
             }
         });
