@@ -696,6 +696,7 @@ public class DatabaseAdapter extends SQLiteOpenHelper {
                 //book.setPrice(cursor.getInt(cursor.getColumnIndex(TABLE_BOOK + "." + COL_BOOK_PRICE)));
                 book.setBookId(cursor.getInt(cursor.getColumnIndex(COL_BOOK_ID)));
                 book.setTitle(cursor.getString(cursor.getColumnIndex(COL_BOOK_TITLE)));
+                book.setImage(cursor.getString(cursor.getColumnIndex(COL_BOOK_IMG)));
                 book.setPrice(cursor.getInt(cursor.getColumnIndex(COL_BOOK_PRICE)));
 
 

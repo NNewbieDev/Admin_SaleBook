@@ -118,11 +118,9 @@ public class InfoActivity extends AppCompatActivity {
     private void showEditTextDialog(String title, String defaultValue, final String field) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(title);
-
         final EditText editText = new EditText(this);
         editText.setText(defaultValue);
         builder.setView(editText);
-
         builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -136,7 +134,6 @@ public class InfoActivity extends AppCompatActivity {
                 }
             }
         });
-
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
