@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.salebook.R;
 import com.example.salebook.database.DatabaseAdapter;
 import com.example.salebook.model.OrderItem;
@@ -91,6 +92,9 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.View
             tvInfo.setText(orderItem.getBookId().getTitle());
             etSoLuong.removeTextChangedListener(textWatcher);
             etSoLuong.setText(String.valueOf(orderItem.getQuantity()));
+            Glide.with(context)
+                    .load(orderItem.getBookId().getImage())
+                    .into(imvBook);
 
             textWatcher = new TextWatcher() {
                 @Override
