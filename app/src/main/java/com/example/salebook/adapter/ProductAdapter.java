@@ -48,23 +48,19 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        // Chuyển dữ liệu list vào các phần tử
          Book book = listProduct.get(position);
         if (listProduct == null) {
             return;
         }
         holder.txttitle.setText(book.getTitle());
-//        holder.txtprice.setText(String.valueOf(book.getPrice()));
         double price = book.getPrice();
         String formattedPrice = formatPrice(price);
         holder.txtprice.setText(formattedPrice);
-
         // Thư Viện Gilde
         Glide.with(context)
                 .load(book.getImage())
                 .into(holder.imgproduct);
-
-
-
         holder.layoutItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

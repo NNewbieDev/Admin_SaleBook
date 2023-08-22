@@ -192,7 +192,7 @@ public class DatabaseAdapter extends SQLiteOpenHelper {
 
 
     @SuppressLint("Range")
-    public List<Book> getDataBook() {
+    public List<Book>   getDataBook() {
         List<Book> booklist = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT * FROM " + TABLE_BOOK;

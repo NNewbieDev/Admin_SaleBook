@@ -63,7 +63,7 @@ public class SalesActivity extends AppCompatActivity {
         searchView = findViewById(R.id.searhview);
         searchView.clearFocus();
 
-
+        // Lấy dữ liệu Book để set vào Adapter
         productAdapter = new ProductAdapter();
         db = new DatabaseAdapter(this);
         productlist = db.getDataBook();

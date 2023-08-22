@@ -70,22 +70,15 @@ public class CartActivity extends AppCompatActivity {
         for (OrderItem o: listOrderItem) {
             quantity += o.getQuantity();
             price += o.getQuantity()*o.getBookId().getPrice();
-
         }
         tvTotalQuantity.setText(quantity+" ");
         tvTotalMoney.setText(price + "đ");
         orderItemAdapter.setQuantityChangeListener(new OrderItemAdapter.QuantityChangeListener() {
             @Override
             public void onQuantityChanged() {
-                // Do something when the overall quantity changes
-
             }
-
             @Override
             public void onQuantityChangedForPosition(int position) {
-                // Do something when the quantity of a specific item changes
-                // Update the total price based on the changed item's position
-                //int newPrice = listOrderItem.get(position).getQuantity() * listOrderItem.get(position).getBookId().getPrice();
                 int newPrice = 0;
                 int newQuantity = 0;
                 for (OrderItem o: listOrderItem) {

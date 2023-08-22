@@ -38,7 +38,6 @@ public class DetailProduct extends AppCompatActivity {
         if(bundle== null){
             return;
         }
-
             Book book = (Book) bundle.get("object_product");
             txtDetailTitle.setText(book.getTitle());
         NumberFormat format = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
