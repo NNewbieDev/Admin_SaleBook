@@ -6,14 +6,22 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/lightorange"
         android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/img_product"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="130dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/img_0" />
+            android:layout_height="wrap_content"
+            android:background="@drawable/vien_bg">
+
+            <ImageView
+                android:id="@+id/img_product"
+                android:layout_width="match_parent"
+                android:layout_height="348dp"
+                android:scaleType="center"
+                android:src="@drawable/img_0" />
+        </LinearLayout>
+
 
         <TextView
             android:id="@+id/txt_detail_title"
@@ -22,7 +30,10 @@
             android:padding="10dp"
             android:text="@string/app_name"
             android:textColor="@color/black"
-            android:textSize="16dp" />
+            android:textSize="30dp"
+            android:textStyle="bold"
+            android:gravity="center"
+            />
 
         <TextView
             android:id="@+id/txt_detail_price"
@@ -31,7 +42,7 @@
             android:padding="10dp"
             android:text="@string/app_name"
             android:textColor="@color/black"
-            android:layout_marginLeft="250dp"
+            android:paddingRight="100dp"
             android:textSize="16dp" />
 
         <LinearLayout
@@ -46,8 +57,9 @@
                 android:layout_height="50dp"
                 android:background="@color/orange"
                 android:drawablePadding="10dp"
-                android:drawableTint="@color/blueAdmin"
-                android:hint="Mô Tả Chi Tiết Sản Phẩm"
+                android:fontFamily="sans-serif-medium"
+
+                android:text="Mô Tả Chi Tiết Sản Phẩm"
                 android:textSize="25dp"
                 android:paddingHorizontal="20dp"
                 android:paddingVertical="10dp" />
@@ -55,13 +67,15 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="383dp">
+            android:layout_height="150dp">
 
             <TextView
                 android:id="@+id/txtdetailproduct"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="TextView"
+
+                android:textStyle="italic" />
         </ScrollView>
 
         <Button
